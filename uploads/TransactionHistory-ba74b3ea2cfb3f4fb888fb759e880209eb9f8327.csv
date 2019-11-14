@@ -1,0 +1,5 @@
+﻿"ID","Time (CET)","Type","Transaction Details","[-] EUR","[+] EUR","Status","Balance","Reference","Amount Sent","Currency Sent","More Information","ID of the coresponding Skrill transaction"
+"1718076118","07 Mar 16 19:42","Upload","Visa","","2.42","processed","402.42","","","","","1718075119"
+"1718076117","07 Mar 16 19:42","Upload","Bank transfer","","400","processed","400","","","","","1717910429"
+"1718077554","07 Mar 16 19:44","Withdraw","Bank transfer","398.47","","processed","3.95","","","","","1718077551"
+"1718077555","07 Mar 16 19:44","Withdraw","Fee","3.95","","processed","0","","","","","1718077552"

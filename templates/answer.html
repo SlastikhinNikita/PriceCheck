@@ -1,0 +1,374 @@
+
+
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main_content %}
+<div style="background-color: #e79898;text-align: center;"> </div>
+<div class="123123">
+</div>
+{% include 'navbar.html' %}
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+   <div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+      <div class="center">
+         <h1>Помощь</h1>
+      </div>
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+               <div class="tab-content" id="tabContent" data-preloader="&lt;img src='/ui/img/loading.gif'&gt; Пожалуйста, ждите...">
+                  <div class="tab-pane fade in active" id="send">
+                     <div class="row text-left">
+                        <div class="col-lg-12">
+                           <style>
+                              .new_message{
+                              border: 1px solid #83b1da;
+                              border-radius: 4px;
+                              background: #fff;
+                              margin: 10px 0px;
+                              padding: 5px
+                              }
+                           </style>
+
+						   
+			{% if ticket.type_ticket == 1 %} 
+			<h2>Восстановление аккаунта</h2>
+			{% elif ticket.type_ticket == 2 %}
+			<h2>Финансовый отдел </h2>	
+			{% elif ticket.type_ticket == 3 %}
+			<h2>Технический отдел</h2>
+			{% elif ticket.type_ticket == 4 %}
+			<h2>Жалоба</h2>
+			{% elif ticket.type_ticket == 5 %}
+			<h2>Другое</h2>
+			{% endif %}						   
+						   
+						   
+						   
+						   
+						   
+						   
+						   
+						   
+						   
+						   
+						   
+                           <h3>{{ ticket.topic }}</h3>
+						   
+						   
+						   
+						   {% if ticket.status != 3 %} 
+                           <div class="new_message">
+                              <div class="form-group">
+                                 <label for="supportModal-message">Ваше сообщение</label>
+                                 <textarea name="message" id="ticket-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+                                 <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                              </div>
+                              <div class="row">
+                                 <div class="col-lg-10">
+                                    <button type="button" class="btn btn-success" onclick="SendMessage_Ticket({{ ticket.id }}, $('#ticket-message').val());">Отправить</button>
+                                 </div>
+                                 <div class="col-lg-2">
+                                    <button type="button" onclick="CloseTicket({{ ticket.id }});" class="btn btn-primary">Вопрос решён</button>
+                                 </div>
+                              </div>
+                           </div>
+						   {% endif %}
+						   
+						   
+                           <style>
+                              #ticket_message .item{
+                              border: 1px solid #136ebd;
+                              border-radius: 2px;
+                              background: #fff;
+                              margin: 10px 0px;
+                              }
+                              #ticket_message .item_head{
+                              background: #e6e6e6;
+                              padding: 5px;
+                              }
+                              #ticket_message .mess{
+                              white-space: word-break;
+                              padding: 5px;
+                              style="word-wrap: break-word;
+                              }
+                           </style>
+						   
+        {%- for message in chat %}
+		
+                           <div id="ticket_message" style="word-wrap: break-word;">
+                              <div class="item">
+                                 <div class="item_head">
+                                    <div class="row">
+                                       <div class="col-lg-10"><b style="color:green;">{{ message[1].email }}</b></div>
+                                       <div class="col-lg-2">{{ message[0].date_time.strftime('%H:%M:%S %d/%m/%Y') }}</div>
+                                    </div>
+                                 </div>
+                                 <div class="mess">{{ message[0].message }}</div>
+                              </div>
+                           </div>
+						   
+        {%- endfor %}	
+						   
+						   
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="clear"></div>
+      </div>
+      <script type="text/javascript">
+         $(document).ready(function() {
+         	$("#sumsumsum1, #sumsumsum2").keydown(function(event) {
+         		// Разрешаем: backspace, delete, tab и escape
+         		if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || 
+         		     // Разрешаем: Ctrl+A
+         		    (event.keyCode == 65 && event.ctrlKey === true) || 
+         		     // Разрешаем: home, end, влево, вправо
+         		    (event.key == ".") || 
+         		    (event.keyCode >= 35 && event.keyCode <= 39)) {
+         		         // Ничего не делаем
+         		         return;
+         		} else {
+         		    // Обеждаемся, что это цифра, и останавливаем событие keypress
+         		    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+         		        event.preventDefault(); 
+         		    }   
+         		}
+         	});
+         });
+         $(document).on("submit", "#lk_partners_transfer", function () {
+         	var form = $(this);
+         	form.find("input[type='submit']").attr("disabled", "disabled").addClass("disabled");
+         	$.ajax({
+         		type: "POST",
+         		url: "/bitrix/components/cashbery_comp/new_lk/ajax.php",
+         		data: form.serialize(),
+         		success: function(html) {
+         			form.find(".status").html(html);
+         			form.find("input[type='submit']").removeAttr("disabled", "disabled").removeClass("disabled");
+         		}
+         	});
+         	return false;
+         });
+         function jgetintstring (s) {
+         	s = (Math.floor(s*100)/100);
+         	s = s + "";
+         	return s.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+         }
+         $(document).on("change", "#lk_partners_transfer select[name='currency'], #lk_partners_transfer select[name='currency2'], #lk_partners_transfer input[name='sum']", function () {
+         	var s = 0;
+         	if ($("#lk_partners_transfer select[name='currency']").val().length > 0 && $("#lk_partners_transfer select[name='currency2']").val().length > 0 && $("#lk_partners_transfer input[name='sum']").val().length > 0) {
+         		var r1 = parseFloat($("#lk_partners_transfer select[name='currency']").find("option:selected").attr("data-rate"));
+         		var r2 = parseFloat($("#lk_partners_transfer select[name='currency2']").find("option:selected").attr("data-rate"));
+         		if (isNaN(r1)) { r1 = 1; }
+         		if (isNaN(r2)) { r2 = 1; }
+         		s = parseFloat($("#lk_partners_transfer input[name='sum']").val()) * r1/r2;
+         	}
+         	$("#sumvalue").html(jgetintstring (s));
+         });
+         $(document).on("submit", "#lk_inner_transfer", function () {
+         	var form = $(this);
+         	form.find("input[type='submit']").attr("disabled", "disabled").addClass("disabled");
+         	$.ajax({
+         		type: "POST",
+         		url: "/bitrix/components/cashbery_comp/new_lk/ajax.php",
+         		data: form.serialize(),
+         		success: function(html) {
+         			form.find(".status").html(html);
+         			form.find("input[type='submit']").removeAttr("disabled", "disabled").removeClass("disabled");
+         		}
+         	});
+         	return false;
+         });
+      </script>					
+   </div>
+   <br>
+</div>
+<br>
+</div>
+<div class="clear"></div>
+</div>
+</section>
+<div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form>
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title" id="myModalLabel">Отправить сообщение в поддержку</h4>
+            </div>
+            <div class="modal-body">
+               <div class="row text-center">
+                  <div class="col-xs-12">
+                     <div class="form-group">
+                        <label for="supportModal-email">Выберите услугу/проблему</label>
+                        <select class="form-control" name="type" id="supportModal-type">
+                           <option value="1" selected="selected">Восстановление аккаунта</option>
+                           <option value="2">Финансовый отдел</option>
+                           <option value="3">Технический отдел</option>
+                           <option value="4">Жалоба</option>
+                           <option value="5">Другое</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="supportModal-email">Тема</label>
+                        <input type="text" name="topic" id="supportModal-topic" class="form-control" autocomplete="off">
+                     </div>
+                     <div class="form-group">
+                        <label for="supportModal-message">Ваше сообщение</label>
+                        <textarea name="message" id="supportModal-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+                        <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-info modalFormSubmitButton" id="supportModal-submit">Отправить сообщение</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+
+
+<script>
+   $('#newticket').click(function() {
+   	var $modal = $('#supportModal');
+   	$modal.modal('show');
+   	return false;
+   });
+   
+   $('#supportModal-submit').click(function() {
+   	var $modal = $('#supportModal');
+   	$.ajax({
+   		type: 'POST',
+   		url: '/ajax/support/',
+   		data: {type: 'new', type_ticket: $('#supportModal-type').val(), topic: $('#supportModal-topic').val(), message: $('#supportModal-message').val()},
+   		success: function(data){
+   			var Data = JSON.parse(data);
+   			if (Data['s'] == 1) {
+   				$modal.modal('hide');
+   				$('#supportCompleteModal').modal('show');
+   				LoadTickets();
+   			} else {
+   				alert(Data['d']);
+   			}
+   		}
+   	});
+   	return false;
+   });
+</script>
+
+				{% if current_user.groups == 'admins' %}
+
+<script>
+   
+   function CloseTicket(id){
+   	$.ajax({
+   		type: 'POST',
+   		url: '/ajax/admin/',
+   		data: {type: 'close', id: id},
+   		success: function(data){
+   			var Data = data;
+   			if (Data['s'] == 1) {
+   				window.location.href = '/admin/'+id+'/';
+   			} else {
+   				alert(Data['d']);
+   			}
+   		}
+   	});
+   }
+
+   
+   function SendMessage_Ticket(id, message){
+   	$.ajax({
+   		type: 'POST',
+   		url: '/ajax/admin/',
+   		data: {type: 'new_message_ticket', id: id, message: message},
+   		success: function(data){
+   			var Data = data;
+   			if (Data['s'] == 1) {
+				window.location.href = '/admin/'+id+'/';
+   				$('#ticket-message').val('');
+   			} else {
+   				alert(Data['d']);
+   			}
+   		}
+   	});
+   }
+   
+</script>
+
+				{% else %}
+
+<script>
+   function CloseTicket(id){
+   	$.ajax({
+   		type: 'POST',
+   		url: '/ajax/support/',
+   		data: {type: 'close', id: id},
+   		success: function(data){
+   			var Data = data;
+   			if (Data['s'] == 1) {
+   				window.location.href = '/support/'+id+'/';
+   			} else {
+   				alert(Data['d']);
+   			}
+   		}
+   	});
+   }
+
+   
+   function SendMessage_Ticket(id, message){
+   	$.ajax({
+   		type: 'POST',
+   		url: '/ajax/support/',
+   		data: {type: 'new_message_ticket', id: id, message: message},
+   		success: function(data){
+   			var Data = data;
+   			if (Data['s'] == 1) {
+				window.location.href = '/support/'+id+'/';
+   				$('#ticket-message').val('');
+   			} else {
+   				alert(Data['d']);
+   			}
+   		}
+   	});
+   }
+   
+</script>
+
+				{% endif %}
+
+<div class="modal fade" id="supportCompleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-body">
+            <h1 class="text-success text-center">Сообщение отправлено</h1>
+            <hr>
+            <p class="lead"></p>
+            <p class="lead">В самое ближайшее время вы получите подтверждение о получении вашего сообщения нашей службой поддержки. </p>
+            <p></p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="supportErrorModal" sendareply('0',="" true,="" 'Сумма="" не="" является="" числом.="" Доступные="" символы:="" 0-9="" и="" ".".');="" <div="">
+<div class="modal-content">
+   <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Произошла ошибка</h4>
+   </div>
+   <div class="modal-body">
+      <h1 class="text-danger text-center">Произошла ошибка</h1>
+      <p class="lead">Извините. Пожалуйста, попробуйте позднее.</p>
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+   </div>
+</div>
+</div>
+{% endblock %}
+

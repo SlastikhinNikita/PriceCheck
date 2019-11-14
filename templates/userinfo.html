@@ -1,0 +1,704 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Home 
+{% endblock %} 
+{% block main_content %}
+<div style="background-color: #e79898;text-align: center;">	</div>
+<div class="123123"></div>
+{% include 'navbar.html' %}
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+   <div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+      <div class="center">
+         <h1>Информация пользователя</h1>
+      </div>
+      <div class="row">
+         <div class="col-md-6">
+	 
+            <div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+                     <div class="table-responsive">
+					       <div class="center">
+							<h3>Общая информация</h3><br/>
+							</div>							
+	<div class="center">
+								 <table class="center">
+								 <tr><td class="text-left">ID:      </td><td>{{ user.id }}</td><td></td></tr>
+								 <tr><td class="text-left">Логин:   </td><td>{{ user.username }}</td><td><input class="btn-info btn-sm" type="button" value="Изменить Логин" data-toggle="modal" data-target="#changeLoginModal"></td></tr>
+								 <tr><td class="text-left">Имя:     </td><td>{{ user.firstname }}</td><td><input class="btn-info btn-sm" type="button" value="Изменить Имя" data-toggle="modal" data-target="#changeFirstnameModal"></td></tr>
+								 <tr><td class="text-left">Фамилия: </td><td>{{ user.secondname }}</td><td><input class="btn-info btn-sm" type="button" value="Изменить Фамилию" data-toggle="modal" data-target="#changeSecondnameModal"></td></tr>
+								 <tr><td class="text-left">E-mail:  </td><td>{{ user.email }}</td><td><input class="btn-info btn-sm" type="button" value="Изменить почту" data-toggle="modal" data-target="#changeEmailModal"></td></tr>
+								 <tr><td class="text-left">Пароль:  </td><td>{{ user.password }}</td><td><input class="btn-info btn-sm" type="button" value="Изменить пароль" data-toggle="modal" data-target="#changePasswordModal"></td></tr>
+								 {% if user.groups == 'users' %}
+								 <tr><td class="text-left">Группа:  </td><td class="bg-success">{{ user.groups }}</td><td><input class="btn-danger btn-sm" type="button" value="Дать права администратора" data-toggle="modal" data-target="#changeGroupsModal"></td></tr>
+								 {% else %}
+								 <tr><td class="text-left">Группа:  </td><td class="bg-danger">{{ user.groups }}</td><td><input class="btn-success btn-sm" type="button" value="Дать права пользователя" data-toggle="modal" data-target="#changeGroupsModal"></td></tr>
+								 {% endif %}
+								 <tr><td class="text-left">RUB:     </td><td>{{ user.rub }}</td><td><input class="btn-warning btn-sm" type="button" value="Добавить RUB" data-toggle="modal" data-target="#addRUBModal"></td></tr>
+								 <tr><td class="text-left">USD:     </td><td>{{ user.usd }}</td><td><input class="btn-warning btn-sm" type="button" value="Добавить USD" data-toggle="modal" data-target="#addUSDModal"></td></tr>
+								 <tr><td class="text-left">ID Реферальщика:</td><td>{{ user.id_ref }}</td><td><input class="btn-info btn-sm" type="button" value="Поменять ID рефера" data-toggle="modal" data-target="#changeIDRefModal"></td></tr>
+								 </table>
+								 
+								 
+
+								 
+               </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+                     <div class="table-responsive">
+					 					       <div class="center">
+							<h3>Тикеты поддержки</h3><br/>
+							</div>	
+                        <table class="table" id="ticket_list">
+                           <thead>
+                              <tr>
+                                 <th style="text-align: center;">#</th>
+                                 <th style="text-align: center;">Тип</th>
+                                 <th style="text-align: center;">Тема</th>
+                                 <th style="text-align: center;">Статус</th>
+                                 <th style="text-align: center;">Время</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              {% if current_user.groups == 'users' %}	
+                              {%- for ticket in tickets|sort(attribute='id') %}
+                              <tr class="item_list" style="cursor:pointer;" onclick="window.location.href = '/support/{{ ticket.id }}/';">
+                                 <th style="text-align: center;" scope="row">{{ ticket.id }}</th>
+                                 {% if ticket.type_ticket == 1 %} 
+                                 <td style="text-align: left;">Восстановление аккаунта</td>
+                                 {% elif ticket.type_ticket == 2 %}
+                                 <td style="text-align: left;">Финансовый отдел</td>
+                                 {% elif ticket.type_ticket == 3 %}
+                                 <td style="text-align: left;">Технический отдел</td>
+                                 {% elif ticket.type_ticket == 4 %}
+                                 <td style="text-align: left;">Жалоба</td>
+                                 {% elif ticket.type_ticket == 5 %}
+                                 <td style="text-align: left;">Другое</td>
+                                 {% endif %}					
+                                 <td style="text-align: left;">{{ ticket.topic }}</td>
+                                 {% if ticket.status == 1 %} 
+                                 <td style="text-align: center;"><span style="color: blue;">На расмотрении<span></span></span></td>
+                                 {% elif ticket.status == 2 %}
+                                 <td style="text-align: center;"><span style="color: green;">В процессе<span></span></span></td>
+                                 {% elif ticket.status == 3 %}
+                                 <td style="text-align: center;"><span style="color: red;">Закрыт<span></span></span></td>
+                                 {% endif %}
+                                 <td style="text-align: center;">{{ ticket.date_time.strftime('%H:%M:%S %d/%m/%Y') }}</td>
+                              </tr>
+                              {%- endfor %}			
+                              {% else %}		
+                              {%- for ticket in tickets %}
+                              <tr class="item_list" style="cursor:pointer;" onclick="window.location.href = '/admin/{{ ticket.id }}/';">
+                                 <th style="text-align: center;" scope="row">{{ ticket.id }}</th>
+                                 {% if ticket.type_ticket == 1 %} 
+                                 <td style="text-align: left;">Восстановление аккаунта</td>
+                                 {% elif ticket.type_ticket == 2 %}
+                                 <td style="text-align: left;">Финансовый отдел</td>
+                                 {% elif ticket.type_ticket == 3 %}
+                                 <td style="text-align: left;">Технический отдел</td>
+                                 {% elif ticket.type_ticket == 4 %}
+                                 <td style="text-align: left;">Жалоба</td>
+                                 {% elif ticket.type_ticket == 5 %}
+                                 <td style="text-align: left;">Другое</td>
+                                 {% endif %}					
+                                 <td style="text-align: left;">{{ ticket.topic }}</td>
+                                 {% if ticket.status == 1 %} 
+                                 <td style="text-align: center;"><span style="color: blue;">На расмотрении<span></span></span></td>
+                                 {% elif ticket.status == 2 %}
+                                 <td style="text-align: center;"><span style="color: green;">В процессе<span></span></span></td>
+                                 {% elif ticket.status == 3 %}
+                                 <td style="text-align: center;"><span style="color: red;">Закрыт<span></span></span></td>
+                                 {% endif %}
+                                 <td style="text-align: center;">{{ ticket.date_time.strftime('%H:%M:%S %d/%m/%Y') }}</td>
+                              </tr>
+                              {%- endfor %}					
+                              {% endif %}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+				  
+				  
+            <div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+                     <div class="table-responsive">
+					 					       <div class="center">
+							<h3>История платежей</h3><br/>
+							</div>	
+ 											<table class="table">
+											<thead>
+												<tr>
+													<th class="text-center">Операция</th>
+													<th class="text-center">От кого ID</th>
+													<th class="text-center">Коментарий</th>
+													<th class="text-center">Сумма</th>
+													<th class="text-center">Время</th>
+												</tr> 
+											</thead> 
+											<tbody> 
+											{%- for record in payment_history|sort(attribute='date_time') %}
+											<tr class="bg-success">
+											<td>Зачисление</td>
+											<td>{{ record.from_user_id }}</td>
+											<td>{{ record.message }}</td>
+											<td>
+{% if record.rub == 0 %} 
+{{ record.usd }} USD
+{% endif %}												
+{% if record.usd == 0 %} 
+{{ record.rub }} RUB
+{% endif %}													
+											</td>
+											<td>{{ record.date_time }}</td>
+											</tr>		
+											{%- endfor %}
+											</tbody> 
+											</table>
+                     </div>
+                  </div>				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+         </div>
+      </div>
+   </div>
+   <br>
+</div>
+<br>
+</div>
+<div class="clear"></div>
+</div>
+</section>
+
+
+
+
+<div class="modal fade" id="changeLoginModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новый Логин.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeLoginModal-username">Новый Логин</label>
+                                <input name="username" id="changeLoginModal-username" class="form-control" value="{{ user.username }}" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeLoginModal-submit" data-value="Сменить Логин">Сменить Логин</button>
+                    <button type="button" class="btn btn-info" id="changeLoginModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changeFirstnameModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новое Имя.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeFirstnameModal-firstname">Новое Имя</label>
+                                <input name="firstname" id="changeFirstnameModal-firstname" class="form-control" value="{{ user.firstname }}" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeFirstnameModal-submit" data-value="Сменить Имя">Сменить Имя</button>
+                    <button type="button" class="btn btn-info" id="changeFirstnameModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changeSecondnameModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новую Фамилию.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeSecondnameModal-secondname">Новая Фамилия</label>
+                                <input name="secondname" id="changeSecondnameModal-secondname" class="form-control" value="{{ user.secondname }}" type="text">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeSecondnameModal-submit" data-value="Сменить Фамилию">Сменить Фамилию</button>
+                    <button type="button" class="btn btn-info" id="changeSecondnameModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новый email.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeEmailModal-email">Новый email</label>
+                                <input name="email" id="changeEmailModal-email" class="form-control" autocomplete="off" value="{{ user.email }}" type="text">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeEmailModal-submit" data-value="Сменить email">Сменить email</button>
+                    <button type="button" class="btn btn-info" id="changeEmailModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новый пароль.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changePasswordModal-password">Новый пароль</label>
+                                <input name="password" id="changePasswordModal-password" class="form-control" autocomplete="off" value="{{ user.password }}" type="text">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changePasswordModal-submit" data-value="Сменить пароль">Сменить пароль</button>
+                    <button type="button" class="btn btn-info" id="changePasswordModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changeGroupsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+				
+								 {% if current_user.groups == 'users' %}
+								 <p class="error text-danger">Вы точно уверены, что хотите дать права администратора пользователю - {{ user.username}} ?</p>
+								 {% else %}
+								 <p class="error text-danger">Вы точно уверены, что хотите дать права пользователя пользователю - {{ user.username}} ?</p>
+								 {% endif %}					
+					
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn left" id="changeGroupsModal-submit" data-value="Да">Да</button>
+                    <button type="button" class="btn right" id="changeGroupsModal-cancel" data-dismiss="modal">Отменить</button>
+					
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="addRUBModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form>
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <p class="lead">Закинуть RUB.
+                  <br>
+               </p>
+               <div class="row text-center">
+                  <div class="col-sm-6 col-sm-offset-3">
+                     <div class="form-group">
+                        <div class="form-group">
+                           <div>От кого (Логин):</div>
+                           <div><input name="from_user" id="addRUBModal-from_user" class="form-control" autocomplete="off" value="{{ current_user.username }}" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Кому (Логин):</div>
+                           <div><input name="to_user" id="addRUBModal-to_user" class="form-control" autocomplete="off" value="{{ user.username }}" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Сумма RUB:</div>
+                           <div><input name="rub_sum" id="addRUBModal-rub_sum" class="form-control" autocomplete="off" placeholder="0" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Комментарий:</div>
+                           <textarea name="message" id="addRUBModal-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-info modalFormSubmitButton" id="addRUBModal-submit" data-value="Отправить">Отправить</button>
+               <button type="button" class="btn btn-info" id="addRUBModal-cancel" data-dismiss="modal">Отменить</button>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+
+<div class="modal fade" id="addUSDModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <form>
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-body">
+               <p class="lead">Закинуть USD.
+                  <br>
+               </p>
+               <div class="row text-center">
+                  <div class="col-sm-6 col-sm-offset-3">
+                     <div class="form-group">
+                        <div class="form-group">
+                           <div>От кого (Логин):</div>
+                           <div><input name="from_user" id="addUSDModal-from_user" class="form-control" autocomplete="off" value="{{ current_user.username }}" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Кому (Логин):</div>
+                           <div><input name="to_user" id="addUSDModal-to_user" class="form-control" autocomplete="off" value="{{ user.username }}" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Сумма USD:</div>
+                           <div><input name="usd_sum" id="addUSDModal-usd_sum" class="form-control" autocomplete="off" placeholder="0" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                           <div>Комментарий:</div>
+                           <textarea name="message" id="addUSDModal-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-info modalFormSubmitButton" id="addUSDModal-submit" data-value="Отправить">Отправить</button>
+               <button type="button" class="btn btn-info" id="addUSDModal-cancel" data-dismiss="modal">Отменить</button>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+
+
+<div class="modal fade" id="changeIDRefModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новый ID Реферальщика.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeIDRefModal-idref">Новый ID Реферальщика</label>
+                                <input name="idref" id="changeIDRefModal-idref" class="form-control" placeholder="{{ user.id_ref }}" type="text">
+                            </div>
+                        </div>
+                    </div>
+					<p class="error text-danger">Список реферов:</p>
+					{%- for refer in refers %}
+					<p class="error text-danger">{{ refer.username }} - ID:{{ refer.id}}</p>
+					{%- endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeIDRefModal-submit" data-value="Сменить ID Реферальщика">Сменить ID Реферальщика</button>
+                    <button type="button" class="btn btn-info" id="changeIDRefModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+				
+				
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $('#addRUBModal-rub_sum').mask('000000000');
+  $('#addUSDModal-usd_sum').mask('000000000');
+});
+</script>
+
+
+
+<script>
+    $('#changeLoginModal-submit').click(function() {
+        var $modal = $('#changeLoginModal');
+        var id = '{{ user.id }}';
+        var username = $('#changeLoginModal-username').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_username',
+                id: id,
+                username: username
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });
+    $('#changeFirstnameModal-submit').click(function() {
+        var $modal = $('#changeFirstnameModal');
+        var id = '{{ user.id }}';
+        var firstname = $('#changeFirstnameModal-firstname').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_firstname',
+                id: id,
+                firstname: firstname
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });
+    $('#changeSecondnameModal-submit').click(function() {
+        var $modal = $('#changeSecondnameModal');
+        var id = '{{ user.id }}';
+        var secondname = $('#changeSecondnameModal-secondname').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_secondname',
+                id: id,
+                secondname: secondname
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });
+    $('#changeEmailModal-submit').click(function() {
+        var $modal = $('#changeEmailModal');
+        var id = '{{ user.id }}';
+        var email = $('#changeEmailModal-email').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_email',
+                id: id,
+                email: email
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });	
+    $('#changePasswordModal-submit').click(function() {
+        var $modal = $('#changePasswordModal');
+        var id = '{{ user.id }}';
+        var password = $('#changePasswordModal-password').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_password',
+                id: id,
+                password: password
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });		
+    $('#changeGroupsModal-submit').click(function() {
+        var $modal = $('#changeGroupsModal');
+        var id = '{{ user.id }}';
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_groups',
+                id: id
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });			
+	
+    $('#addRUBModal-submit').click(function() {
+        var $modal = $('#addRUBModal');
+        var from_user = $('#addRUBModal-from_user').val();
+        var to_user = $('#addRUBModal-to_user').val();
+        var rub_sum = $('#addRUBModal-rub_sum').val();
+        var message = $('#addRUBModal-message').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'addRUB',
+                from_user: from_user,
+                to_user: to_user,
+                rub_sum: rub_sum,
+                message: message
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });		
+	
+    $('#addUSDModal-submit').click(function() {
+        var $modal = $('#addUSDModal');
+        var from_user = $('#addUSDModal-from_user').val();
+        var to_user = $('#addUSDModal-to_user').val();
+        var usd_sum = $('#addUSDModal-usd_sum').val();
+        var message = $('#addUSDModal-message').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'addUSD',
+                from_user: from_user,
+                to_user: to_user,
+                usd_sum: usd_sum,
+                message: message
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });			
+	
+    $('#changeIDRefModal-submit').click(function() {
+        var $modal = $('#changeIDRefModal');
+        var id = '{{ user.id }}';
+        var idref = $('#changeIDRefModal-idref').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/userinfo/',
+            data: {
+                type: 'change_idref',
+                id: id,
+                idref: idref
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+					window.location.href = '/userinfo/{{ user.id }}/';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });		
+</script>
+{% endblock %}

@@ -1,0 +1,384 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Home 
+{% endblock %} 
+
+
+{% block main_content %}
+	<div style="background-color: #e79898;text-align: center;">	</div>
+	<div class="123123">
+					
+					
+			
+					</div>
+
+{% include 'navbar.html' %}
+
+
+		
+		
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+					<div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+						<div class="center">
+	<h1>Помощь</h1>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+			<div class="tab-content" id="tabContent" data-preloader="&lt;img src='/ui/img/loading.gif'&gt; Пожалуйста, ждите...">
+					<div class="tab-pane fade in active" id="send">
+						<div class="row text-left">
+							<div class="col-lg-12">
+							
+															<style>
+									
+									.item_list:hover{
+										background: #d2d2d2;
+									}
+									
+									
+									
+									</style>
+								<div class="tab-content">
+												{% if current_user.groups == 'users' %}
+									<div class="row">
+										<div class="col-lg-10">
+											<button type="button" class="btn btn-success" id="newticket">Задать вопрос</button>
+										</div>
+									</div>
+									{% endif %}
+									
+									<div class="table-responsive"> 
+										<table class="table" id="ticket_list">
+	<thead>
+		<tr>
+			<th style="width: 70px; text-align: center;">#</th>
+			<th style="width: 190px; text-align: left;">Тип</th>
+			{% if current_user.groups == 'admins' %}
+			<th style="text-align: left;">Пользователь</th>
+			{% endif %}
+			<th style="text-align: left;">Тема</th>
+			<th style="width: 100px; text-align: center;">Статус</th>
+			<th style="width: 146px; text-align: center;">Время</th>
+		</tr> 
+	</thead> 
+	<tbody>
+
+	
+	
+{% if current_user.groups == 'users' %}	
+		
+        {%- for ticket in tickets|sort(attribute='id') %}
+				
+		<tr class="item_list" style="cursor:pointer;" onclick="window.location.href = '/support/{{ ticket.id }}/';">
+			<th style="text-align: center;" scope="row">{{ ticket.id }}</th>
+
+			{% if ticket.type_ticket == 1 %} 
+			<td style="text-align: left;">Восстановление аккаунта</td>
+			{% elif ticket.type_ticket == 2 %}
+			<td style="text-align: left;">Финансовый отдел</td>	
+			{% elif ticket.type_ticket == 3 %}
+			<td style="text-align: left;">Технический отдел</td>
+			{% elif ticket.type_ticket == 4 %}
+			<td style="text-align: left;">Жалоба</td>
+			{% elif ticket.type_ticket == 5 %}
+			<td style="text-align: left;">Другое</td>
+			{% endif %}					
+			
+			<td style="text-align: left;">{{ ticket.topic }}</td>
+			{% if ticket.status == 1 %} 
+			<td style="text-align: center;"><span style="color: blue;">На расмотрении<span></span></span></td>
+			{% elif ticket.status == 2 %}
+			<td style="text-align: center;"><span style="color: green;">В процессе<span></span></span></td>		
+			{% elif ticket.status == 3 %}
+			<td style="text-align: center;"><span style="color: red;">Закрыт<span></span></span></td>
+			{% endif %}
+			
+			
+			<td style="text-align: center;">{{ ticket.date_time.strftime('%H:%M:%S %d/%m/%Y') }}</td>
+		</tr>		
+
+        {%- endfor %}			
+		
+{% else %}		
+		
+        {%- for ticket in tickets %}
+				
+		<tr class="item_list" style="cursor:pointer;" onclick="window.location.href = '/admin/{{ ticket[0].id }}/';">
+			<th style="text-align: center;" scope="row">{{ ticket[0].id }}</th>
+
+			{% if ticket[0].type_ticket == 1 %} 
+			<td style="text-align: left;">Восстановление аккаунта</td>
+			{% elif ticket[0].type_ticket == 2 %}
+			<td style="text-align: left;">Финансовый отдел</td>	
+			{% elif ticket[0].type_ticket == 3 %}
+			<td style="text-align: left;">Технический отдел</td>
+			{% elif ticket[0].type_ticket == 4 %}
+			<td style="text-align: left;">Жалоба</td>
+			{% elif ticket[0].type_ticket == 5 %}
+			<td style="text-align: left;">Другое</td>
+			{% endif %}					
+			
+			<td style="text-align: left;">{{ ticket[1].email }}</td>
+			<td style="text-align: left;">{{ ticket[0].topic }}</td>
+			{% if ticket[0].status == 1 %} 
+			<td style="text-align: center;"><span style="color: blue;">На расмотрении<span></span></span></td>
+			{% elif ticket[0].status == 2 %}
+			<td style="text-align: center;"><span style="color: green;">В процессе<span></span></span></td>		
+			{% elif ticket[0].status == 3 %}
+			<td style="text-align: center;"><span style="color: red;">Закрыт<span></span></span></td>
+			{% endif %}
+			
+			
+			<td style="text-align: center;">{{ ticket[0].date_time.strftime('%H:%M:%S %d/%m/%Y') }}</td>
+		</tr>		
+
+        {%- endfor %}					
+		
+		
+		
+		
+
+{% endif %}
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+		</tbody></table>
+									</div>
+								</div>
+								
+
+								
+														</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+
+					</div>
+					<br>
+				</div><br>
+	</div>
+	<div class="clear"></div>
+</div>
+		
+			
+		
+	
+</section>
+
+
+
+<div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<form>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Отправить сообщение в поддержку</h4>
+				</div>
+				<div class="modal-body">
+				<div class="row text-center">
+				<div class="col-xs-12">
+				<div class="form-group">
+					<label for="supportModal-email">Выберите услугу/проблему</label>
+					<select class="form-control" name="type" id="supportModal-type">
+						<option value="1" selected="selected">Восстановление аккаунта</option>
+						<option value="2">Финансовый отдел</option>
+						<option value="3">Технический отдел</option>
+						<option value="4">Жалоба</option>
+						<option value="5">Другое</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="supportModal-email">Тема</label>
+					<input type="text" name="topic" id="supportModal-topic" class="form-control" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label for="supportModal-message">Ваше сообщение</label>
+					<textarea name="message" id="supportModal-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+					<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+				</div>
+				</div>
+				</div>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-info modalFormSubmitButton" id="supportModal-submit">Отправить сообщение</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+
+<script>
+
+$('#newticket').click(function() {
+	var $modal = $('#supportModal');
+	$modal.modal('show');
+	return false;
+});
+
+$('#supportModal-submit').click(function() {
+	var $modal = $('#supportModal');
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {
+			type: 'new', 
+			type_ticket: $('#supportModal-type').val(), 
+			topic: $('#supportModal-topic').val(), 
+			message: $('#supportModal-message').val()},
+		success: function(data){
+			var Data = data;
+			if (Data['s'] == 1) {
+				$modal.modal('hide');
+				$('#supportCompleteModal').modal('show');
+				LoadTickets();
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+	return false;
+});
+
+function LoadTickets(){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'load_tickets'},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$('#ticket_list').html(Data['d']);
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function CloseTicket(id){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'close', id: id},
+		success: function(data){
+			var Data = data;
+			if (Data['s'] == 1) {
+				window.location.href = '/account/support/';
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function LoadTicket(id){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'load_ticket', id: id},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$('#ticket_message').html(Data['d']);
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function SendMessage_Ticket(id, message){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'new_message_ticket', id: id, message: message},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				LoadTicket(id);
+				$('#ticket-message').val('');
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+</script>
+
+
+
+<div class="modal fade" id="supportCompleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body">
+<h1 class="text-success text-center">Сообщение отправлено</h1>
+<hr>
+<p class="lead"></p><p class="lead">В самое ближайшее время вы получите подтверждение о получении вашего сообщения нашей службой поддержки. </p><p></p>
+</div>
+<div class="modal-footer">
+  <a href="/support.html" class="btn btn-default">Закрыть</a>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="supportErrorModal" sendareply('0',="" true,="" 'Сумма="" не="" является="" числом.="" Доступные="" символы:="" 0-9="" и="" ".".');="" <div="">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">Произошла ошибка</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-danger text-center">Произошла ошибка</h1>
+<p class="lead">Извините. Пожалуйста, попробуйте позднее.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

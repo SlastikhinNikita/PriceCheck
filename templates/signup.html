@@ -1,0 +1,115 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Home 
+{% endblock %} 
+
+
+{% block main_content %}
+	<div style="background-color: #e79898;text-align: center;">	</div>
+	<div class="123123">
+					
+					
+					
+					</div>
+<section id="disclaimer">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-sm-12"> 
+						<h1>Регистрация</h1>
+						<p>Внимание, указывайте только реальне данные!</p>
+					</div>
+
+				</div>
+				
+				<div class="row text-center">
+				<div class="col-sm-12 alert">
+				<p></p>	
+				</div>		
+				</div>						
+				
+				
+				<div class="row text-center">
+				
+				{% if valid_error == true %} 
+				<div class="alert alert-danger col-sm-12">
+				<p>Внимание, вы ввели никоректные данные!</p>	
+				</div>				
+				{% endif %}  
+	
+				</div>				
+				
+				
+				
+				<div class="row text-center">
+					<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4" style="width: 80%;margin-left: 10%;">
+					<div class="alerts"></div>
+					<br>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form id="signup" class="signForm" method="POST" action="/signup.html">
+									{{ form.hidden_tag() }}
+									<div class="form-group">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control input-lg" id="login" name="email" placeholder="Email">
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control input-lg" id="username" name="username" placeholder="Логин">
+									</div>
+									<div class="form-group" style="display:none">
+										<input type="text" class="form-control input-lg" id="ref" name="ref" value="{{ ref }}">
+									</div>									
+									<div class="form-group">
+										<input type="text" class="form-control input-lg" id="firstname" name="firstname" placeholder="Имя" style="width: 49%;"><input type="text" class="form-control input-lg" id="secondname" name="secondname" placeholder="Фамилия" style="width: 49%;margin-left: 2%;">
+									</div>
+									<div class="form-group">
+									</div>
+								
+									<div class="form-group">
+										<input type="password" class="form-control input-lg" id="password" name="password" placeholder="Пароль">
+									</div>
+									<div class=" form-group"="">
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" id="checkbox" class="form-check-input">
+											Я соглашаюсь создать Личный кабинет и принимаю условия  <a href="/agreement.html" target="_blank">Пользовательского соглашения об условиях и порядке использования сайта circleinvest</a>  
+										</label>
+									</div><br>
+										<input type="submit" class="btn btn-lg btn-block btn-primary" id="submit" value="зарегистрироваться">
+								</form>
+							</div>
+						</div>
+						<p>или</p>
+						<p></p>
+						
+
+						<a class="btn btn-primary btn-xs" href="/signin.html">Войти</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		
+		
+		<script>
+		$('#submit').click(function(){
+			var Data = $('#signup').serialize();
+			if ($('#checkbox').prop("checked") == true) {
+				$.ajax({
+					type: 'POST',
+					url: '/ajax/registration/',
+					data: Data,
+					success: function(data){
+						var Data = JSON.parse(data);
+						if (Data['s'] == 1) {
+							$('.alerts').html(Data['d']);
+						} else alert(Data['d']);
+					}
+				});
+			}else alert('Registration is only available after consent.');
+		});
+		</script>
+{% endblock %}
+
+

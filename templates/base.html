@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>{{ title }}</title>
+ <!--   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}"> 
+	<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/ico.png') }}"/>	
+	
+	
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+
+
+    <!-- Compiled and minified CSS -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+
+  </head>
+  <body class=" grey lighten-2">
+
+
+	
+
+
+{% raw %}
+
+
+
+
+<div class="main">
+<div class="row">
+<div  class="col s1 offset-s9">
+
+
+
+<script type="text/x-template" id="modal-template">
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+		  <button class="modal-default-button btn-floating red"  @click="$emit('close')"><i class="material-icons">close</i></button>
+            <slot name="header">
+              default header
+            </slot>              
+			
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+                    body
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</script>
+
+<!-- app -->
+<div id="app">
+  <button id="show-modal" @click="showModal = true" class="btn waves-effect waves-light">Загрузить</button>
+  <!-- use the modal component, pass in the prop -->
+  <modal v-if="showModal" @close="showModal = false">
+
+    <h3 slot="header">Загрузить прайс</h3>
+    <div slot="body">
+
+<div class="row" >			  
+<form id="uploadForm">
+    <div class="file-field input-field">
+      <div class="col">
+      <div class="btn-floating">
+        <input class="  " type="file" name="file" id="file" accept=".xls, .xlsx, .csv">
+        <i class="material-icons">attach_file</i>
+      </div>
+      </div>
+      <div class="file-path-wrapper col s6">
+        <input class="file-path validate" type="text">
+      </div>
+      <div class="col s2">
+		<a name="Отправить" class="btn" @click="uploadFiles">Отправить</a>
+      </div>
+    </div>
+</form>  
+</div>
+
+<div v-for="name in priceNamesList" class="row" style="margin-bottom: 0">
+<div  class="col s10">
+<p>Доступны: {{ name }}</p>
+</div>
+<div  class="col s2">
+<p @click="delPriceByName(name)"><a class="btn-small btn-floating red"><i class="material-icons">delete</i></a></p>
+</div>
+
+</div>
+
+
+			  
+				  
+				  
+				  
+    </div>
+            <div slot="footer">
+              <h4>{{ status }}</h4>
+            </div>          
+	
+	
+  </modal>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+<div  class="col s2">
+<a href="/result.html" target="_blank" class="btn waves-effect waves-light">Просмотреть результаты</a>
+</div>
+</div>
+
+
+
+	<!-- component template -->
+<script type="text/x-template" id="grid-template">
+  <table class="table-hover white centered" v-if="heroes!=''">
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }"
+		  class="green"
+		  >
+          {{ key | capitalize }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="entry in filteredHeroes" :class="{'selected': entry['id'] == selected}">
+        <td 	v-for="key in columns" 
+				v-if="key == 'del'"
+				>
+          <a @click="delRow(entry)" class="btn-small btn-floating red"><i class="material-icons">delete</i></a>
+		  
+        </td>
+		<td v-else 	@click="clickOnMain(entry)" 
+					:class="{'brown lighten-5': entry['id'] == selected}"  >
+		<!--			:class="{'selected': entry['id'] == selected}"  > -->
+		{{entry[key]}}
+		</td>
+
+		
+		
+		
+      </tr>
+    </tbody>
+  </table>
+</script>
+
+
+
+
+
+
+
+<div id="control">
+<div class="row">
+<div  class="col s4">
+
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">search</i>
+          <input type="text" class="validate" id="searchinput" name="search" v-model="searchQuery">
+          <label for="searchinput">Поиск по основному прайс-листу</label>
+        </div>
+		<div class="input-field col s2">
+		<button v-on:click="updateGrid" class="btn waves-effect waves-light red col s12">Искать</button>			
+      </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="col s4 offset-s2">
+
+<div class="row">
+
+
+
+
+
+
+
+<!--
+<div class="col s11">
+<label for="searchinput2">Основные слова:&nbsp;&nbsp;</label>
+<input id="searchinput2" name="search" v-model="searchQuery2">&nbsp;&nbsp;
+</div>
+
+<div class="col s11">
+<label for="searchinput2">Вторичные слова:&nbsp;&nbsp;</label>
+<input id="searchinput2" name="search" v-model="searchQuery2">&nbsp;&nbsp;
+<button v-on:click="getAllComp" class="btn waves-effect waves-light red" type="submit" name="action">Искать&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>	
+</div>
+-->
+
+
+
+
+
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s5">
+          <i class="material-icons prefix">filter_1</i>
+          <input type="text" class="validate" id="searchinput1" name="search" v-model="searchQuery2">
+          <label for="searchinput1">Основные слова</label>
+        </div>
+        <div class="input-field col s5">
+          <i class="material-icons prefix">filter_2</i>
+          <input id="searchinput2" type="tel" class="validate" v-model="searchQuery3">
+          <label for="searchinput2">Вторичные слова</label>
+        </div>
+		<div class="input-field col s2">
+		<button v-on:click="getAllComp" class="btn waves-effect waves-light red col s12">Искать</button>			
+      </div>
+      </div>
+    </div>
+
+
+
+
+</div>
+ 
+</div>
+</div>
+</div>
+	
+
+		
+
+
+
+
+		
+		
+	
+
+<div class="row">
+<div class="col s6">
+<div id="demo">
+  <demo-grid
+    :heroes="gridData"
+    :columns="gridColumns"
+    :filter-key="searchQuery">
+  </demo-grid>
+</div>
+</div>
+
+
+
+
+
+
+
+<script type="text/x-template" id="grid-template3">
+    <div class="centered">
+               <table class="white centered" 
+			    v-if="comp_name.f!=''"
+				v-for ="(comp, name, index) in comp_name"
+				:class="'table'+index" 
+				>
+        <thead>
+         <tr>  <th colspan="5" class="blue"> 
+   			{{ name }} 
+   			</th>  </tr><tr>
+           <th v-for="key in columns"
+             @click="sortBy(key)"
+             :class="{ active: sortKey == key }" class="blue  lighten-1">
+             {{ key | capitalize }}
+             <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+             </span>
+           </th>		
+   			</tr>
+       </thead>	
+   <tbody>
+      <tr v-for="entry in comp"  class="centered">
+        <td 	v-for="key in columns" 
+				
+				v-if="key == 'del'"
+				>{% endraw %}
+          <a @click="delRow(entry)" class="btn-small btn-floating red"><i class="material-icons">delete</i></a>
+		  {% raw %}
+        </td>
+		<!-- <td v-else :class="{'warning': entry[key] < 0 , 'info': ((entry[key] > 0) & (key == 'diff'))}"> -->
+		<td v-else :class="{'orange lighten-5': entry[key] < 0 , 'light-blue lighten-5': ((entry[key] > 0) & (key == 'diff'))}">
+		{{entry[key]}}
+		</td>
+      </tr>
+	  </tbody>
+ </table> 
+   </div>
+</script>
+
+
+
+
+<div class="col s6">
+<div id="demo3">
+
+
+  <demo-grid3
+    :visible="visible"
+    :comp_name="gridData"
+    :columns="gridColumns">
+  </demo-grid3>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="row">
+<div class="col s12">
+<div id="SaveResultButton">
+
+  
+<button @click="saveResult" class="btn waves-effect waves-light col s12 amber">Сохранить в общий резултат</button> 
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endraw %}
+	
+
+	{% block main_content %} {% endblock %} 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
+<script rel="text/javascript" src="{{ url_for('static', filename='js/vuejs.js') }}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Contacts 
+{% endblock %} 
+
+
+{% block main_content %}
+<link href="{{ url_for('static', filename='css/contact2018-b1e2ec0be99883742f42b5fb0703f1c0.css') }}" rel="stylesheet">
+    <main class="contact">
+      <section class="contact-help">
+        <div class="container">
+          <h1 class="text-gradient">Контакты</h1>
+          <div class="support-content">
+            <div class="row">
+              <div class="col">
+                <h3 class="contact-help-heading">Вам нужна помощь?</h3>
+                <p>Просто напишите нам, войдя в свой кабинет и воспользовавшись пунктом меню - помощь.</p>
+              </div>
+              <div class="col">
+                <ul class="list-clean">
+                  <li>
+                    Наш <a href="https://twitter.com/circleinvestru?lang=en" class="callout-link">Twitter</a>
+                  </li>
+                  <li>
+                    Наш <a href="https://www.instagram.com/circleinvest.ru/" class="callout-link">Instagram</a>
+                  </li>
+                  <li>
+                    Наш <a href="https://t.me/circleinvest" class="callout-link">Telegram</a>
+                  </li>
+                  <li>
+                    Получить <a href="https://circleinvest.ru/account/support/" class="callout-link">Помощь</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-more">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h4>Для партнёров</h4>
+              <p>Мы с радотью выслушаем ваше предложения о сотрудничестве. Просто напишите нам support@circleinvest.ru, чтобы мы могли связаться и обсудить все детали. </p>
+            </div>
+            <div class="col">
+              <h4>Для СМИ</h4>
+              <p>Напишите нам support@circleinvest.ru для ознакомления с нашей пресс-страницей. Так же вы можете загрузить логотипы и другие активы, написав нам. </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,160 @@
+.main, #demo3,.table-responsive
+{
+  display: flex;
+  overflow-x: auto
+}
+
+
+.table-hover {	
+}
+
+body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 12px;
+  color: #444;
+}
+
+table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+  min-width: 500px;
+  max-width: 100%;
+}
+
+#demo table, #demo3 table{
+	margin-top: 100px;
+}
+#demo2 table, #demo3 table {
+  border: 2px solid #009cff;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+#demo table td:hover{
+  background-color: #ddd;
+}
+
+
+th {
+  background-color: #42b983;
+  color: rgba(255,255,255,1);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#demo2 th, #demo3 th {
+  background-color: #009cff;
+  color: rgba(255,255,255,1);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  padding: 2px 5px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+
+
+.search{
+	display: block;
+	position: absolute;
+	z-index: 10;
+}
+
+.info{
+color: #0c5460;
+background-color: #d1ecf1;
+border-color: #bee5eb;	
+	
+}
+
+.warning{
+color: #856404;
+background-color: #fff3cd;
+border-color: #ffeeba;
+}
+
+
+.selected{
+	background: #ccc;
+}
+
+
+.top_table{
+	display: table;  	
+	float: left;
+}
+
+.table_record{
+	text-align: center;
+	background: #fff;
+	display: table-cell; 	
+	vertical-align: top;
+	font-weight: bold;
+}
+
+.table_name{
+	font-size: 14px;
+	padding: 5px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 50px minmax(300px, 1fr) 50px;
+}
+
+.box {
+	  width: 100%;
+	  text-align: center;
+	  border-bottom: 1px solid #ccc;
+	  font-weight: normal;
+	  font-size: 12px;
+}
+
+.b{
+	text-align: left;
+	padding: 0 4px;
+}
+
+
+.four_element{
+	grid-template-columns: 50px minmax(300px, 1fr) 50px 50px;
+}

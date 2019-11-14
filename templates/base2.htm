@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberpunk 2077 — from the creators of The Witcher 3: Wild Hunt</title>
+
+
+<meta name="apple-mobile-web-app-title" content="Cyberpunk 2077 — from the creators of The Witcher 3: Wild Hunt">
+<meta name="application-name" content="Cyberpunk 2077 — from the creators of The Witcher 3: Wild Hunt">
+<meta name="description" content="Enter the world of Cyberpunk 2077 — a story-driven, open world RPG of the dark future from CD PROJEKT RED, creators of The Witcher series of games.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="pl_PL">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="es_MX">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cyberpunk 2077 — from the creators of The Witcher 3: Wild Hunt">
+<meta property="og:description" content="Enter the world of Cyberpunk 2077 — a story-driven, open world RPG of the dark future from CD PROJEKT RED, creators of The Witcher series of games.">
+<meta property="og:site_name" content="Cyberpunk 2077 — from the creators of The Witcher 3: Wild Hunt">
+<meta property="og:image" content="https://www.cyberpunk.net/img/4b1d760d1ce7081d/social-thumbnail-en.7.jpg">
+<meta property="og:url" content="https://www.cyberpunk.net/en/quadra">
+<link rel="canonical" href="https://www.cyberpunk.net/en/quadra">
+<link href="{{ url_for('static', filename='css/css.css') }}" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-57x57.7.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-60x60.7.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-72x72.7.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-76x76.7.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-114x114.7.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-120x120.7.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-144x144.7.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-152x152.7.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/apple-icon-180x180.7.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/android-icon-192x192.7.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/favicon-32x32.7.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/favicon-96x96.7.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/favicon-16x16.7.png">
+<link rel="manifest" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/manifest.7.json">
+<link rel="shortcut icon" href="https://www.cyberpunk.net/favicons/4b1d760d1ce7081d/favicon.7.ico">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="msapplication-config" content="/favicons/4b1d760d1ce7081d/browserconfig.7.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script>
+    isMobile = (typeof isMobile === 'undefined') ? (/mobile/i.test(navigator.userAgent) && ('ontouchstart' in window || (window.DocumentTouch && document instanceof DocumentTouch))) : isMobile;
+</script>
+</head>
+<body class="">
+
+<h3 class="title">
+        CONNECTION ESTABLISHED
+</h3>
+<div class="box--outer"><div class="box"><div class="box--inner"><div class="content"><div class="holder"><b>Welcome to J.A.L.S. </b> (just another login screen)<br><br><div class="row"><form id="signin" class="signForm" method="POST" action="/signin.htm"><div class="col col__left label">
+                    Login
+                  </div><div class="col col__center"><input id="login" maxlength="32" name="username" type="text"></div></div><div class="row"><div class="col col__left label">
+                    Password
+                  </div>{{ form.hidden_tag() }}<div class="col col__center"><input id="password" name="password" required="required" placeholder="" data-error="" maxlength="32" autocomplete="new-password" autofocus="true" type="password"></div></div>
+				  <div class="row"><button type="submit" id="submit" name="submit">[login]</button><a href="/signup.html"><button type="submit" id="submit" name="submit">[signup]</button></a></div>
+				  <div class="row"></div>
+				  </form> 
+				  
+
+				  </div></div></div></div></div>
+				 
+				   
+				  </body>
+				  </html>

@@ -1,0 +1,121 @@
+{% block navigate %} 
+<section id="disclaimer" style="padding-top:30px;">
+	<div class="container" style="max-width: 90%;">
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
+		<div class="wow animated bounceInDown lk_left_menu lk_top_menu animated animated" style="visibility: visible; animation-name: bounceInDown;">
+			<div class="ul_wrapp">
+				<ul>
+					<li class="ulli1">
+						<a href="/wallet.html" {% if menu_active == 1 %} class="active" {% endif %} title="Рабочий стол"><span class="lk_menu_icon lk_menu_icon_1"></span><span class="link">Рабочий стол</span></a>
+					</li>
+					<li class="ulli2">
+						<a href="/invest.html" {% if menu_active == 2 %} class="active" {% endif %} title="Инвестировать"><span class="lk_menu_icon lk_menu_icon_2"></span><span class="link">Инвестировать</span></a>
+					</li>
+					<li class="ulli5">
+						<a href="/myinvest.html" {% if menu_active == 3 %} class="active" {% endif %} title="Мои инвестиции"><span class="lk_menu_icon lk_menu_icon_5"></span><span class="link">Мои инвестиции</span></a>
+					</li>
+					<li class="ulli27">
+						<a href="/userfiat.html" {% if menu_active == 4 %} class="active" {% endif %} title="Внутренний перевод"><span class="lk_menu_icon lk_menu_icon_27"></span><span class="link">Внутренний перевод</span></a>
+					</li>
+					<li class="ulli4">
+						<a href="/history.html" {% if menu_active == 5 %} class="active" {% endif %} title="Мои операции"><span class="lk_menu_icon lk_menu_icon_4"></span><span class="link">Мои операции</span></a>
+					</li>
+					<li class="ulli11">
+						<a href="/partners.html" {% if menu_active == 6 %} class="active" {% endif %} title="Мои партнёры"><span class="lk_menu_icon lk_menu_icon_11"></span><span class="link">Мои партнёры</span></a>
+					</li>
+					<li class="ulli6">
+						<a href="/send.html" {% if menu_active == 7 %} class="active" {% endif %} title="Обмен валют"><span class="lk_menu_icon lk_menu_icon_6"></span><span class="link">Вывод средств</span></a>
+					</li>
+					<li class="ulli7">
+						<a href="/settings.html" {% if menu_active == 8 %} class="active" {% endif %} title="Личные данные"><span class="lk_menu_icon lk_menu_icon_7"></span><span class="link">Личные данные</span></a>
+					</li>
+					<li style="border: 1px solid transparent;">
+						
+					</li>
+
+
+
+				{% if current_user.groups == 'admins' %}
+					<li class="ulli7">
+					<a href="/adminpanel.html" target="_self" {% if menu_active == 10 %} class="active" {% endif %} class="invest-link"><span class="lk_menu_icon lk_menu_icon_1"></span><span class="link">Админка</span></a> 
+					</li>
+					<li class="ulli7">
+						<a href="/admin.html" {% if menu_active == 9 %} class="active" {% endif %} title="Помощь"><span class="lk_menu_icon lk_menu_icon_17"></span><span class="link">Помощь</span></a>
+					</li>	
+				{% else %}
+					<li class="ulli7">
+						<a href="/support.html" {% if menu_active == 9 %} class="active" {% endif %} title="Помощь"><span class="lk_menu_icon lk_menu_icon_17"></span><span class="link">Помощь</span></a>
+					</li>
+               {% endif %}
+
+
+				</ul>
+			</div><a class="show_lk_top_menu" data-text="Показать меню" data-texts="Скрыть меню" href="javascript:%20void(0);">Показать меню</a>
+		</div>
+		<script type="text/javascript">
+		                      $(document).on("click", ".show_lk_top_menu", function () {
+		                          var obj = $(this).closest(".lk_top_menu");
+		                          if (obj.find(".ul_wrapp").hasClass("active")) {
+		                              obj.find(".ul_wrapp").removeClass("active");
+		                              obj.find(".ul_wrapp").slideUp("fast");
+		                              obj.find(".show_lk_top_menu").html(obj.find(".show_lk_top_menu").attr("data-text"));
+		                          } else {
+		                              obj.find(".show_lk_top_menu").html(obj.find(".show_lk_top_menu").attr("data-texts"));
+		                              obj.find(".ul_wrapp").slideDown("fast");
+		                              obj.find(".ul_wrapp").addClass("active");
+		                          }
+		                      });
+		</script>
+	</div>
+	<div class="hidden-xs hidden-sm col-md-4 col-lg-3">
+		<div class="wow bounceInLeft lk_left_menu  animated" style="visibility: visible; animation-name: bounceInLeft;">
+			<ul>
+				<li class="ulli1">
+					<a {% if menu_active == 1 %} class="active" {% endif %} href="/wallet.html" title="Рабочий стол"><span class="lk_menu_icon lk_menu_icon_1"></span><span class="link">Рабочий стол</span></a>
+				</li>
+				<li class="ulli2">
+					<a {% if menu_active == 2 %} class="active" {% endif %} href="/invest.html" title="Инвестировать"><span class="lk_menu_icon lk_menu_icon_2"></span><span class="link">Инвестировать</span></a>
+				</li>
+				<li class="ulli5">
+					<a {% if menu_active == 3 %} class="active" {% endif %} href="/myinvest.html" title="Мои инвестиции"><span class="lk_menu_icon lk_menu_icon_5"></span><span class="link">Мои инвестиции</span></a>
+				</li>
+				<li class="ulli27">
+					<a {% if menu_active == 4 %} class="active" {% endif %} href="/userfiat.html" title="Внутренний перевод"><span class="lk_menu_icon lk_menu_icon_27"></span><span class="link">Внутренний перевод</span></a>
+				</li>
+				<li class="ulli4">
+					<a {% if menu_active == 5 %} class="active" {% endif %} href="/history.html" title="Мои операции"><span class="lk_menu_icon lk_menu_icon_4"></span><span class="link">Мои операции</span></a>
+				</li>
+				<li class="ulli11">
+					<a {% if menu_active == 6 %} class="active" {% endif %} href="/partners.html" title="Мои партнёры"><span class="lk_menu_icon lk_menu_icon_11"></span><span class="link">Мои партнёры</span></a>
+				</li>
+				<li class="ulli6">
+					<a {% if menu_active == 7 %} class="active" {% endif %} href="/send.html" title="Обмен валют"><span class="lk_menu_icon lk_menu_icon_6"></span><span class="link">Вывод средств</span></a>
+				</li>
+				<li class="ulli7">
+					<a {% if menu_active == 8 %} class="active" {% endif %} href="/settings.html" title="Личные данные"><span class="lk_menu_icon lk_menu_icon_7"></span><span class="link">Личные данные</span></a>
+				</li>
+
+				{% if current_user.groups == 'admins' %}
+					<li class="ulli7">
+					<a href="/adminpanel.html" target="_self" {% if menu_active == 10 %} class="active" {% endif %} class="invest-link"><span class="lk_menu_icon lk_menu_icon_1"></span><span class="link">Админка</span></a> 
+					</li>
+					<li class="ulli7">
+						<a href="/admin.html" {% if menu_active == 9 %} class="active" {% endif %} title="Помощь"><span class="lk_menu_icon lk_menu_icon_17"></span><span class="link">Помощь</span></a>
+					</li>					
+				{% else %}
+					<li class="ulli7">
+						<a href="/support.html" {% if menu_active == 9 %} class="active" {% endif %} title="Помощь"><span class="lk_menu_icon lk_menu_icon_17"></span><span class="link">Помощь</span></a>
+					</li>
+				{% endif %}
+				
+			</ul>
+		</div>
+	</div>
+		
+		
+	
+
+
+
+{% endblock %} 

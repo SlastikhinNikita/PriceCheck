@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>{{ title }}</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
+	<link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/ico.png') }}"/>	
+	
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+
+
+    <!-- Compiled and minified CSS -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+
+  </head>
+  <body class=" grey lighten-2">
+
+
+	
+
+
+{% raw %}
+<div class="main">
+
+  
+  
+<!-- <div v-else="name = '1main_price'">О, нет 😢 -->
+  
+  
+  
+  
+<script type="text/x-template" id="resultGridTemplate">
+
+<div class="tables">
+
+
+
+<div v-for ="(record, name) in dataresult" class="row z-depth-3 top_table white">
+			{% endraw %}
+			<div class="col">
+			<a @click="delRow(record)" class="btn-floating  red"><i class="material-icons">delete</i></a>
+			</div>
+			{% raw %}
+<div v-for="(value, name) in record" class="table_record"
+		v-if="(name != 'selected') && (name != 'res_id')"
+		
+		>
+<div :class="{'green': name == '1main_price', 'blue': name != '1main_price'}"
+	class="table_name">	
+{{ name | capitalize(name) }}
+</div>
+
+<div 	v-for="entry in value" 
+		class="wrapper"
+		:class="{'four_element': name != '1main_price','selected': (entry.id == record['selected'][0].sel_id)}">
+
+
+		
+<div class="box a">{{ entry.id }}</div>
+<div class="box b">{{ entry.name }}</div>
+<div class="box c">{{ entry.price }}</div>
+<div v-if="name != '1main_price'" 
+	class="box d"
+	:class="{'warning': (entry.price - record['selected'][0].sel_price < 0) , 'info': ((entry.price - record['selected'][0].sel_price > 0))}">
+{{ entry.price - record['selected'][0].sel_price }}
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+</script>
+
+
+
+
+<div id="ResultTable">
+  <result-grid
+    :dataresult="gridRData"
+    :columns="gridRColumns">
+  </result-grid>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endraw %}
+	
+
+	{% block main_content %} {% endblock %} 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>	
+<script rel="text/javascript" src="{{ url_for('static', filename='js/vuejsresult.js') }}"></script>
+
+
+  </body>
+</html>
+
+
+
+

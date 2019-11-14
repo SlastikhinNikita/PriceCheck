@@ -1,0 +1,167 @@
+ {% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main_content %}
+<div style="background-color: #e79898;text-align: center;"> </div>
+<div class="123123">
+</div>
+{% include 'navbar.html' %}
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+    <div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="wow  bounceInRight lk_inner_page" style="visibility: visible; animation-name: bounceInRight;">
+                    <div class="center">
+                        <h1>Пополнение баланса</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="lk_block wow zoomInDown" style="min-height: auto; visibility: visible; animation-name: zoomInDown;">
+                                <div class="lk_head_block">
+                                    Выберите валюту пополнения:
+                                </div>
+                                <form action="/" id="lk_add_funds">
+                                    <input name="lang" value="ru" type="hidden">
+                                    <input name="type" value="lk_add_funds" type="hidden">
+                                    <select name="currency">
+                                        <option value="0" selected="selected">Выберите валюту</option>
+                                        <option value="217" data-rates="427515.3666" data-id="20">Биткоин</option>
+                                        <option value="506124" data-rates="18261.0358" data-id="168">Ethereum</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row lk_one_height" id="show_fund_types" style="display: none;">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="lk_block" style="min-height: 42px;">
+                                <div class="lk_head_block">
+                                    Электронные платёжные системы:
+                                </div>
+                                <div class="funds_list_items">
+                                    <div class="inline funds_list_item" data-curr="0,217" style="display: none;">
+                                        <a href="javascript: void(0);" class="funds_list_item_a" data-id="237" title="Bitcoin"><img src="/static/img/btc.png" alt=""></a>Bitcoin
+                                        <br>
+                                    </div>
+                                    <div class="inline funds_list_item" data-curr="0,506124" style="">
+                                        <a href="javascript: void(0);" class="funds_list_item_a" data-id="506096" title="Ethereum"><img src="/static/img/eth.png" alt=""></a>Ethereum
+                                        <br>
+                                    </div>
+                                    <div class="funds_list_no_item active"  style="display: none;">Для данной валюты нет способов пополнения через ЭПС</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row show_fund_types_descr" id="show_fund_types_descr506096" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="lk_block" style="min-height: auto;">
+                                <div class="lk_head_block">
+                                    Ethereum:
+                                </div>
+                                Что бы пополниь счёт Вы должны совершить оплату на полученный кошелек.
+                                <br>
+                                <br>Для этого Вы можете либо воспользоваться обменниками либо сделать прямой перевод.
+                                <br>
+                                <br>Сразу после оплаты вы должны написать нам сумму и время пополнения.
+                                <form method="post" id="ethereum">
+                                    <div class="line">
+                                        Номер кошелька:
+                                    </div>
+                                    <div class="line">
+                                        <label style="display: block; margin-bottom: 5px;">0xb8944D0b4C274F47fA20A93ef4BC93B5d53C1b9D</label>
+										<img src="{{ url_for('static', filename='img/qr-codeeth.gif') }}" width="148" height="148" border="0" title="QR код">
+                                    </div>
+                                    <div class="line">
+                                        <a class="btn" href="https://www.bestchange.ru/">Список обменников</a>
+                                    </div>
+                                    <div id="ethereum_text"></div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row show_fund_types_descr" id="show_fund_types_descr237" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="lk_block" style="min-height: auto;">
+                                <div class="lk_head_block">
+                                    Bitcoin:
+                                </div>
+                                Что бы пополниь счёт Вы должны совершить оплату на полученный кошелек.
+                                <br>
+                                <br>Для этого Вы можете либо воспользоваться обменниками либо сделать прямой перевод.
+                                <br>
+                                <br>Сразу после оплаты вы должны написать нам сумму и время пополнения.
+                                <form method="post" id="btc_form">
+                                    <div class="line">
+                                        Номер кошелька:
+                                    </div>
+                                    <div class="line">
+                                        <label style="display: block; margin-bottom: 5px;">1YVWx2z4MRQMbtMim5vkCKkpDJwLJmkKc</label>
+										<img src="{{ url_for('static', filename='img/qr-codebit.gif') }}" width="148" height="148" border="0" title="QR код">
+                                    </div>
+                                    <a class="btn" href="https://www.bestchange.ru/">Список обменников</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+       
+                 
+                    <script type="text/javascript">
+                        $(document).on("change", "#lk_add_funds select[name='currency']", function() {
+                            var id = $(this).val();
+                            if (id > 0) {
+                                $("#show_fund_types").show();
+                                $(".funds_list_item").hide();
+                                $(".show_fund_types_descr").hide();
+                                $(".funds_list_items").each(function() {
+                                    var j = 0;
+                                    $(this).find(".funds_list_item").each(function() {
+                                        var c = $(this).attr("data-curr").split(",");
+                                        for (var i = 0; i <= c.length; i++) {
+                                            if (c[i] > 0 && c[i] == id) {
+                                                $(this).fadeIn("fast");
+                                                j++;
+                                            }
+                                        };
+                                    });
+                                    if (j == 0) {
+                                        $(this).find(".funds_list_no_item").fadeIn("fast");
+                                    } else {
+                                        $(this).find(".funds_list_no_item").hide();
+                                    }
+                                });
+                            } else {
+                                $("#show_fund_types").hide();
+                                $(".funds_list_item").hide();
+                                $(".show_fund_types_descr").hide();
+                            }
+                            lk_one_height();
+                        });
+                        $(document).on("click", ".funds_list_item_a", function() {
+                            if (!$(this).hasClass("active")) {
+                                $(".funds_list_item_a").removeClass("active");
+                                $(this).addClass("active");
+                                $(".show_fund_types_descr").hide();
+                                $("#show_fund_types_descr" + $(this).attr("data-id")).fadeIn("fast");
+                                $("body, html").animate({
+                                    "scrollTop": $("#show_fund_types_descr" + $(this).attr("data-id")).offset().top - 20 + "px"
+                                });
+                            }
+
+                            return false;
+                        });
+                    </script>
+                    <br>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <br>
+</div>
+<br>
+</div>
+<div class="clear"></div>
+</div>
+</section>
+{% endblock %}

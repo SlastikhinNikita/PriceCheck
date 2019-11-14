@@ -1,0 +1,1080 @@
+{% extends 'base.html' %} 
+{% block title %} 
+Home 
+{% endblock %} 
+
+
+{% block main_content %}
+	<div style="background-color: #e79898;text-align: center;">	</div>
+	<div class="123123">
+					
+					
+			
+					</div>
+
+{% include 'navbar.html' %}
+
+
+		
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+					<div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+						<div class="center">
+	<h1>Мои инвестиции</h1>
+</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="lk_block wow fadeIn" style="visibility: visible; animation-name: fadeIn; min-height: auto;">
+				<table class="lk_table">
+					<thead>
+						<tr>
+							<td style="width: 150px;">Тариф</td>
+							<td>Дата создания - <br>дата окончания</td>
+							<td>Сумма</td>
+							<td>Начисление</td>
+							<td>Статус</td>
+							<td>Подробная <br>информация</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><td colspan="6" style="text-align: center">На данный момент у Вас нет инвестиций</td></tr>					</tbody>
+				</table>
+				<br>
+				 *Инветиции могут повлятся в этом списке с задержкой в 24 часа.<br></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+					</div>
+					<br>
+				</div><br>
+	</div>
+	<div class="clear"></div>
+</div>
+		
+			
+		
+	
+</section>
+
+
+<div class="modal fade" id="sellCoinsErrorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Ошибка обмена</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-danger text-center">Ошибка обмена</h1>
+<p class="lead">Извините, произошла ошибка при получении актуальных 
+курсов обмена. Пожалуйста, попробуйте совершить обменную операцию через 
+5-10 минут.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="sellCoinsConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" data-tradetime="" data-type="" data-wallet="" data-amount="" data-price="" data-address="" data-transaction="" data-walletcode="" data-template="">
+<form>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Предосмотр транзакции</h4>
+</div>
+<div class="modal-body">
+<span id="sellCoinsConfirmModal-msg" class="lead" data-template="Вы выводите &lt;b&gt;%AMOUNT% %CODE%&lt;/b&gt;."></span>
+<br>
+<br>
+<p class="lead">Пожалуйста, подтвердите операцию вводом своего пароля.</p>
+<div class="row text-center">
+<div class="col-sm-6 col-sm-offset-3">
+<div class="form-group">
+<label for="sellCoinsConfirmModal-code">Ваш пароль</label>
+<input type="password" id="sellCoinsConfirmModal-code" class="form-control input-lg" data-isotp="false" data-incorrect="Неверный пароль или код." data-empty="Заполните">
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-info modalFormSubmitButton" id="sellCoinsConfirmModal-continue" disabled="disabled" data-template="Продать (%SECONDS%)" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait" data-value="Подтвердить и отправить">Подтвердить и отправить</button>
+<button type="button" class="btn btn-default" id="sellCoinsConfirmModal-cancel" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</form>
+</div>
+
+
+
+
+<div class="modal fade" id="sellCoinsSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body">
+<h1 class="text-success text-center">Перевод отправлен</h1>
+<br>
+<span id="sellCoinsSuccessModal-msg" class="lead" data-template="Вы вывели &lt;b&gt;&lt;b&gt;%AMOUNT% %CODE%&lt;/b&gt;&lt;/b&gt;. Информация об этой операции будет доступна в разделе История."></span>
+<hr>
+<p class="text-center">Вы довольны обменом?<br>Пожалуйста, оцените качество сервиса от 1 <span class="text-muted">(Плохо)</span> до 5 звезд <span class="text-muted">(Отлично)</span></p>
+<div class="cryptovotes text-center" style="font-size: 2em;"></div>
+<div id="sellCoinsSuccessModal-votes" style="display:none;">
+<input type="hidden" id="sellCoinsSuccessModal-vote" value="">
+<p class="text-center">Большое спасибо! Не хотите оставить комментарий? Возможно нам следует что-то улучшить или изменить?</p>
+<textarea id="sellCoinsSuccessModal-comment" class="form-control"></textarea>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="buyCoinsModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg">
+	<div class="modal-content">
+	<div class="modal-header">
+	<h4 class="modal-title">Пополнить счет</h4>
+	</div>
+
+	<div class="modal-body">
+                    <p>Мы предлагаем различные способы пополнения вашего счеты. Выберите нужный вам способ чтобы узнать условия.</p>
+                    <div class="well well-sm">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Откуда пополнить</label>
+                                <div class="panel panel-default" style="text-align: left; padding:10px;">
+                                    <div class="hide-by-wallet hide-if-rur">В данный момент нет способов пополнения. Мы ищем возможность добавить их как можно скорее. Извините за неудобства!</div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+	<div class="modal-footer">
+	<button type="button" class="btn btn-info" id="buyCoinsModal-continue" disabled="disabled">Продолжить</button>
+	<button type="button" class="btn btn-default" id="buyCoinsModal1-cancel" data-dismiss="modal">Отменить</button>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+<script>
+
+$('#buyCoinsModal-radio-card').click(function(){
+	$('#buyCoinsModal input[name=\'type1\']').val('1');
+});
+
+$('#buyCoinsModal-radio-yandex').click(function(){
+	$('#buyCoinsModal input[name=\'type1\']').val('2');
+});
+
+
+function BuyCoins(st = 0, sum = 0){
+	if (st == 0) {
+		$('#buyCoinsModal').modal('show');
+		$('#buyCoinsModal-amount').val(sum);
+	} else if (st == 1) {
+		window.location.href = "/account/pay/"+$('#buyCoinsModal input[name=\'type1\']').val()+"/"+$('#buyCoinsModal-amount').val()+"/";	
+	} else if (st == 9) {
+		$('#buyCoinsModal1').modal('show');
+	}
+}
+
+</script>
+
+
+<div class="modal fade" id="walletAddressDeleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<form>
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-body">
+	<p class="lead">Вы собираетесь удалить адрес <b><span class="walletAddressDeleteConfirmModal-address"></span></b> из вашего <b><span class="walletAddressDeleteConfirmModal-currency"></span></b> счета.</p>
+	<p class="lead"><b>После этого вы больше не сможете получать платежи, отправленные на этот адрес.</b></p>
+	<p class="lead">Пожалуйста, подтвердите операцию вводом своего пароля.</p>
+	<input type="hidden" id="walletAddressDeleteConfirmModal-wallet">
+	<input type="hidden" id="walletAddressDeleteConfirmModal-address">
+	<input type="hidden" id="walletAddressDeleteConfirmModal-code">
+	<div class="row text-center">
+	<div class="col-sm-6 col-sm-offset-3">
+	<div class="form-group">
+	<label for="walletAddressDeleteConfirmModal-password">Ваш пароль</label>
+	<input type="password" id="walletAddressDeleteConfirmModal-password" class="form-control" data-isotp="false" data-incorrect="Неверный пароль или код." data-empty="Заполните">
+	<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="modal-footer">
+	<button type="button" class="btn btn-danger modalFormSubmitButton" id="walletAddressDeleteConfirmModal-send" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait" data-value="Remove address">Удалить адрес</button>
+	<button type="button" class="btn btn-default" id="walletAddressDeleteConfirmModal-cancel" data-dismiss="modal">Отменить</button>
+	</div>
+	</div>
+	</div>
+	</form>
+</div>
+
+
+<div class="modal fade" id="walletAddressInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"><h4 class="modal-title" data-template="%WALLET% address"></h4></div>
+			<div class="modal-body">
+				<input type="hidden" id="walletAddressInfoModal-wallet">
+				<input type="hidden" id="walletAddressInfoModal-address">
+				<input type="hidden" id="walletAddressInfoModal-code">
+				<span class="text-center modal-body-content" data-template="Это ваш %WALLET% адрес. Сообщите его другим людям, чтобы они могли отправлять вам платежи. Обратите внимание, что сумма минимальной входящей транзакции составляет"></span>
+				<b><span class="walletAddressInfoModal-minimum" data-template="walletAddressInfoModal-minimum"></span></b>
+				<p class="text-center"><img src="" class="walletAddressInfoModal-qr"></p>
+				<p class="lead text-center" style="word-wrap: break-word;">
+					<b>
+						<span class="walletAddressInfoModal-address"></span>
+					</b>
+				</p>
+				<p class="text-center">
+					<input type="text" class="form-control" id="walletAddressInfoModal-label" data-incorrect="Только цифы 0-9 и англ. буквы A-z" placeholder="Лейбл для адреса для внутреннего использования">
+				</p>
+				<span class="error" style="display: none;"></span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-link pull-left" id="walletAddressInfoModal-delete"><span class="glyphicon glyphicon-trash"></span> Удалить адрес</button>
+				<button type="button" class="btn btn-info" id="walletAddressInfoModal-save">Сохранить</button>
+				<button type="button" class="btn btn-default" id="walletAddressInfoModal-close" data-dismiss="modal">Закрыть</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+$('.walletAddressInfo').click(function() {
+	var $modal = $('#walletAddressInfoModal');
+			
+	$('.modal-title', $modal).html($('.modal-title', $modal).data('template').replace('%WALLET%', $(this).attr('data-wallet')));
+	$('.modal-body-content', $modal).html($('.modal-body-content', $modal).data('template').replace('%WALLET%', $(this).attr('data-wallet')));
+			
+	$('.walletAddressInfoModal-qr', $modal).attr('src', $(this).attr('data-qr'));
+	$('.walletAddressInfoModal-address', $modal).html($(this).attr('data-address'));
+			
+	$('#walletAddressInfoModal-wallet', $modal).val($(this).attr('data-wallet'));
+	$('#walletAddressInfoModal-code', $modal).val($(this).attr('data-code'));
+	$('#walletAddressInfoModal-address', $modal).val($(this).attr('data-address'));
+	$('#walletAddressInfoModal-label', $modal).val($(this).attr('data-label'));
+			
+	$modal.modal('show');
+	return false;
+});
+
+$('#walletAddressInfoModal-delete').click(function() {
+	var $modal = $('#walletAddressDeleteConfirmModal');
+	$('#walletAddressDeleteConfirmModal-wallet', $modal).val($('#walletAddressInfoModal-wallet').val());
+	$('#walletAddressDeleteConfirmModal-code', $modal).val($('#walletAddressInfoModal-code').val());
+	$('#walletAddressDeleteConfirmModal-address', $modal).val($('#walletAddressInfoModal-address').val());
+			
+	$('.walletAddressDeleteConfirmModal-currency', $modal).html($('#walletAddressInfoModal-wallet').val());
+	$('.walletAddressDeleteConfirmModal-address', $modal).html($('#walletAddressInfoModal-address').val());
+			
+	$('#walletAddressInfoModal').modal('hide');
+
+
+	$modal.modal('show');
+			
+	return false;
+});
+
+$('#walletAddressInfoModal-save').click(function() {
+	var $modal = $('#walletAddressInfoModal');
+			
+	$('.error', $modal).html('').hide();
+			
+	var wallet = $('#walletAddressInfoModal-wallet', $modal).val(),
+		address = $('#walletAddressInfoModal-address', $modal).val(),
+		code = $('#walletAddressInfoModal-code', $modal).val(),
+		label = $('#walletAddressInfoModal-label', $modal).val();
+			
+	$('#walletAddressInfoModal-save').attr('disabled', 'disabled');
+	$('#walletAddressInfoModal-delete').attr('disabled', 'disabled');
+	$('#walletAddressInfoModal-close').attr('disabled', 'disabled');
+	$('#walletAddressInfoModal-address').attr('disabled', 'disabled');
+			
+	/*if (!(/^[0-9A-ZА-Я]*$/i.test(label))) {
+		$('.error', $modal).html($('#walletAddressInfoModal-label', $modal).data('incorrect')).show();
+		return;
+	}*/
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/wallet/',
+		data: {type: 'save_label', wallet: wallet, address: address, code: code, label: label},
+		success: function(data){
+			$('#walletAddressInfoModal-save').removeAttr('disabled');
+			$('#walletAddressInfoModal-delete').removeAttr('disabled');
+			$('#walletAddressInfoModal-close').removeAttr('disabled');
+			$('#walletAddressInfoModal-address').removeAttr('disabled');
+					
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$('.wa-' + wallet + '-' + address).attr('data-label', label);
+				if (label.length > 0) {
+					$('.wa-' + wallet + '-' + address + '-value').text(label);
+					$('.wa-' + wallet + '-' + address + '-area').show();
+				} else {
+					$('.wa-' + wallet + '-' + address + '-area').hide();
+					$('.wa-' + wallet + '-' + address + '-value').html('');
+				}
+				$modal.modal('hide');
+			} else {
+				$('.error', $modal).html(Data['d']).show();
+			}
+					
+		}
+	});	
+	
+	
+});
+		
+$('#walletAddressDeleteConfirmModal-send').click(function() {
+	var $this = $(this);
+
+	if ($this.attr('data-processed')) {
+		return;
+	}
+			
+	var $modal = $('#walletAddressDeleteConfirmModal'), 
+		wallet = $('#walletAddressDeleteConfirmModal-wallet', $modal).val(),
+		address = $('#walletAddressDeleteConfirmModal-address', $modal).val(),
+		password = $('#walletAddressDeleteConfirmModal-password', $modal).val(),
+		code = $('#walletAddressDeleteConfirmModal-code', $modal).val(),
+		$error = $('#walletAddressDeleteConfirmModal-password', $modal).parents('.form-group:first').find('.error');
+			
+			
+	$this
+		.attr('data-processed', 1)
+		.addClass('processing')
+		.html($this.data('processing'))
+		.attr('disabled', 'disabled');
+			
+	$('#walletAddressDeleteConfirmModal-password', $modal).attr('disabled', 'disabled');
+	$('#walletAddressDeleteConfirmModal-cancel', $modal).attr('disabled', 'disabled');
+				
+	$error.html('').hide();
+			
+	$('#walletAddressDeleteConfirmModal-password', $modal).parents('.form-group:first').removeClass('has-error');
+			
+	if ($('#walletAddressDeleteConfirmModal-password', $modal).data('isotp') && !/\d{6}/.test(password)) {
+		$('#walletAddressDeleteConfirmModal-password', $modal).parents('.form-group:first').addClass('has-error');
+		$error.html($('#walletAddressDeleteConfirmModal-password', $modal).data('incorrect')).show();
+				
+		$this
+			.removeAttr('disabled')
+			.removeClass('processing')
+			.removeAttr('data-processed')
+			.html($this.data('value'));
+					
+		$('#walletAddressDeleteConfirmModal-password', $modal).removeAttr('disabled');
+		$('#walletAddressDeleteConfirmModal-cancel', $modal).removeAttr('disabled');
+					
+		return false;
+	} else if (!$('#walletAddressDeleteConfirmModal-password', $modal).data('isotp') && password.length == 0) {
+		$('#walletAddressDeleteConfirmModal-password', $modal).parents('.form-group:first').addClass('has-error');
+		$error.html($('#walletAddressDeleteConfirmModal-password', $modal).data('empty')).show();
+				
+		$this
+			.removeAttr('disabled')
+			.removeClass('processing')
+			.removeAttr('data-processed')
+			.html($this.data('value'));
+				
+		$('#walletAddressDeleteConfirmModal-password', $modal).removeAttr('disabled');
+		$('#walletAddressDeleteConfirmModal-cancel', $modal).removeAttr('disabled');
+				
+		return false;
+	}
+			
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/wallet/',
+		data: {type: 'remove', wallet: wallet, address: address, code: code, password: password},
+		success: function(data){
+			$this
+				.removeAttr('disabled')
+				.removeClass('processing')
+				.removeAttr('data-processed')
+				.html($this.data('value'));
+				
+				$('#walletAddressDeleteConfirmModal-password', $modal).removeAttr('disabled');
+				$('#walletAddressDeleteConfirmModal-cancel', $modal).removeAttr('disabled');
+					
+				var Data = JSON.parse(data);
+				if (Data['s'] == 1) {
+					$modal.modal('hide');
+					
+					window.location.reload();
+				} else {
+					$('#walletAddressDeleteConfirmModal-password', $modal).parents('.form-group:first').addClass('has-error');
+					$error.html(Data['d']).show();
+				}
+					
+		}
+	});		
+	
+	return false;
+});
+
+</script>
+
+
+<div class="modal fade" id="walletAddAddressModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"><h4 class="modal-title" data-template="Создать новый %WALLET% адрес"></h4></div>
+			<div class="modal-body">
+				<input type="hidden" id="walletAddAddressModal-wallet">
+				<input type="hidden" id="walletAddAddressModal-code">
+				<p class="lead text-center">
+					Лейбл для адреса 
+					<input type="text" class="form-control" id="walletAddAddressModal-label" placeholder="Лейбл для адреса для внутреннего использования">
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" id="walletAddAddressModal-create" data-template="Создать новый %WALLET% адрес" data-processing="Processing, please wait"></button>
+				<button type="button" class="btn btn-default" id="walletAddAddressModal-cancel" data-dismiss="modal">Отменить</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+$('.walletAddLink').click(function() {
+	var $modal = $('#walletAddAddressModal');
+			
+	$('.modal-title', $modal).html($('.modal-title', $modal).data('template').replace('%WALLET%', $(this).attr('data-wallet')));
+	$('#walletAddAddressModal-wallet', $modal).val($(this).attr('data-wallet'));
+	$('#walletAddAddressModal-label', $modal).removeAttr('disabled').val('');
+	$('#walletAddAddressModal-code', $modal).val($(this).attr('data-code'));
+			
+	$('#walletAddAddressModal-create', $modal)
+				.removeAttr('disabled')
+				.removeClass('processing')
+				.removeAttr('data-processed')
+				.html($('#walletAddAddressModal-create', $modal).data('template').replace('%WALLET%', $(this).attr('data-wallet')));
+			
+	$('#walletAddAddressModal-cancel', $modal).removeAttr('disabled');
+			
+	$modal.modal('show');
+	return false;
+});
+
+$('#walletAddAddressModal-create').click(function() {
+	var $this = $(this);
+			
+	if ($this.attr('data-processed')) {
+		return;
+	}
+			
+	var $modal = $('#walletAddAddressModal'),
+		wallet = $('#walletAddAddressModal-wallet', $modal).val();
+		label = $('#walletAddAddressModal-label', $modal).val();
+		code = $('#walletAddAddressModal-code', $modal).val();
+		
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/wallet/',
+		data: {type: 'create', wallet: wallet, label: label, code: code}
+	});
+			
+	$('#walletAddAddressModal-label', $modal).attr('disabled', 'disabled');
+			
+	$this
+		.attr('data-processed', 1)
+		.addClass('processing')
+		.html($this.data('processing'))
+		.attr('disabled', 'disabled');
+			
+		$('#walletAddAddressModal-cancel', $modal).attr('disabled', 'disabled');
+	
+	window.location.replace('/account/wallet/');
+});
+
+</script>
+
+<div class="modal fade" id="requestPaymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" data-template="Request a %WALLET% payment"></h4>
+</div>
+<div class="modal-body">
+<input type="hidden" id="requestPaymentModal-wallet">
+<p class="lead">Используйте эту форму, чтобы запросить оплату на свой 
+счет. Запрос будет содержать ваш платежный адрес в виде QR-кода, сумму и
+ сообщение для получателя.</p>
+<p class="lead text-center">
+</p><div class="form-group">
+<label for="requestPaymentModal-address">На какой адрес запросить оплату</label>
+<select class="form-control" id="requestPaymentModal-address" data-required="Address is required" data-incorrect="Incorrect address"></select>
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+
+
+<div class="form-group">
+<label for="requestPaymentModal-amount">Сумма</label>
+<input type="text" class="form-control" id="requestPaymentModal-amount" autocomplete="off" data-required="Amount is required" data-incorrect="Incorrect amount">
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+
+<div class="form-group">
+<label for="requestPaymentModal-email">Email получателя</label>
+<input type="text" class="form-control" id="requestPaymentModal-email" data-required="Email is required" data-incorrect="Incorrect email">
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+
+<div class="form-group">
+<label for="requestPaymentModal-message">Ваше сообщение получателю <small class="text-muted">не обязательно</small></label>
+<textarea class="form-control" id="requestPaymentModal-message"></textarea>
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+<p></p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-info" id="requestPaymentModal-submit">Отправить запрос</button>
+<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="requestPaymentFailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Ошибка запроса</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-danger text-center">Ошибка запроса</h1>
+<p class="lead">Извините. Пожалуйста, попробуйте позднее.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="requestPaymentSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Счет отправлен</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-success text-center">Счет отправлен</h1>
+<p class="lead">Счет на оплату был успешно отправлен на email получателя.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="requestPaymentReviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-wallet="" data-address="" data-amount="" data-email="" data-message="">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Предосмотр запроса</h4>
+</div>
+<div class="modal-body">
+<p class="lead" id="requestPaymentReviewModal-body" data-template="Вы отправляете счет на сумму &lt;b&gt;%amount% %currency%&lt;/b&gt; получателю &lt;b&gt;%email%&lt;/b&gt;"></p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-info" id="requestPaymentReviewModal-submit">Все верно, отправить</button>
+<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="resendCodeErrorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Произошла ошибка</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-danger text-center">Произошла ошибка</h1>
+<p class="lead">Извините. Пожалуйста, попробуйте позднее.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="resendCodeSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body">
+<h1 class="text-success text-center">Операция выполнена успешно</h1>
+<p class="lead">Письмо с кодом подтверждения отправлено. Пожалуйста, проверьте как входящие сообщения, так и папку СПАМ.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="walletCloseConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<form>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body">
+<p class="lead">Вы собираетесь закрыть свой <b><span class="walletCloseConfirmModal-currency"></span></b> счет.</p>
+<p class="lead"><b>После этого вы не сможете получать и отправлять платежи в этой валюте, а ваши криптовалютные адреса будут удалены.</b></p>
+<p class="lead">Пожалуйста, подтвердите операцию вводом своего пароля.</p>
+<input type="hidden" id="walletCloseConfirmModal-wallet">
+<div class="row text-center">
+<div class="col-sm-6 col-sm-offset-3">
+<div class="form-group">
+<label for="walletCloseConfirmModal-code">Ваш пароль</label>
+<input type="password" id="walletCloseConfirmModal-code" class="form-control" data-isotp="false" data-incorrect="Неверный пароль или код." data-empty="Заполните">
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-danger modalFormSubmitButton" id="walletCloseConfirmModal-send" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait" data-value="Закрыть &lt;b&gt;&lt;/b&gt; счет">Закрыть <b></b> счет</button>
+<button type="button" class="btn btn-default" id="walletCloseConfirmModal-cancel" data-dismiss="modal">Отменить</button>
+</div>
+</div>
+</div>
+</form>
+</div>
+
+
+
+
+<div class="modal fade" id="walletAutoSaleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<form>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title">Подключить автообмен</h4>
+</div>
+<div class="modal-body">
+<p>Все средства поступающие на указанный счет, будут автоматически 
+обмениваться на выбранную вами валюту по актуальному курсу. Средства, 
+уже находящиеся на счету, затронуты не будут. Автообмен можно отключать и
+ подключать в любое время.</p>
+<div class="well well-sm">
+<div class="form-group">
+<label for="walletAutoSaleModal-base">Подключить автообмен для</label>
+<select class="form-control input-lg" id="walletAutoSaleModal-base">
+<option value="" selected="selected">Выберите счет</option>
+<option value="bitcoin" data-balance="0" data-code="BTC">Bitcoin BTC</option>
+<option value="blackcoin" data-balance="0" data-code="BLK">Blackcoin BLK</option>
+<option value="dash" data-balance="0" data-code="DASH">Dash DASH</option>
+<option value="dogecoin" data-balance="0" data-code="DOGE">Dogecoin DOGE</option>
+<option value="emercoin" data-balance="0" data-code="EMC">Emercoin EMC</option>
+<option value="litecoin" data-balance="0" data-code="LTC">Litecoin LTC</option>
+<option value="monero" data-balance="0" data-code="XMR">Monero XMR</option>
+<option value="peercoin" data-balance="0" data-code="PPC">Peercoin PPC</option>
+<option value="primecoin" data-balance="0" data-code="XPM">Primecoin XPM</option>
+<option value="reddcoin" data-balance="0" data-code="RDD">Reddcoin RDD</option>
+<option value="zcash" data-balance="0" data-code="ZEC">Zcash ZEC</option>
+</select>
+</div>
+<div class="form-group">
+<label for="walletAutoSaleModal-target">Автоматически обменивать на</label>
+<select class="form-control input-lg" id="walletAutoSaleModal-target">
+<option value="" selected="selected">Выберите валюту</option>
+<option value="bitcoin" data-balance="0" data-code="BTC">Bitcoin BTC</option>
+<option value="blackcoin" data-balance="0" data-code="BLK">Blackcoin BLK</option>
+<option value="dash" data-balance="0" data-code="DASH">Dash DASH</option>
+<option value="dogecoin" data-balance="0" data-code="DOGE">Dogecoin DOGE</option>
+<option value="emercoin" data-balance="0" data-code="EMC">Emercoin EMC</option>
+<option value="litecoin" data-balance="0" data-code="LTC">Litecoin LTC</option>
+<option value="monero" data-balance="0" data-code="XMR">Monero XMR</option>
+<option value="peercoin" data-balance="0" data-code="PPC">Peercoin PPC</option>
+<option value="primecoin" data-balance="0" data-code="XPM">Primecoin XPM</option>
+<option value="reddcoin" data-balance="0" data-code="RDD">Reddcoin RDD</option>
+<option value="zcash" data-balance="0" data-code="ZEC">Zcash ZEC</option>
+<option value="eur" data-balance="0" data-code="EUR">Евро EUR</option>
+<option value="usd" data-balance="0" data-code="USD">Доллары USD</option>
+<option value="rub" data-balance="0" data-code="RUB">Рубли RUB</option>
+<option value="uah" data-balance="0" data-code="UAH">Гривны UAH</option>
+</select>
+</div>
+<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-info modalFormSubmitButton" id="walletAutoSaleModal-submit" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait" data-value="Подключить автообмен">Подключить автообмен</button>
+<button type="button" class="btn btn-default" id="walletAutoSaleModal-cancel" data-dismiss="modal">Отменить</button>
+</div>
+</div>
+</div>
+</form>
+</div>
+
+
+
+
+
+<div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<form>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Отправить сообщение в поддержку</h4>
+				</div>
+				<div class="modal-body">
+				<div class="row text-center">
+				<div class="col-xs-12">
+				<div class="form-group">
+					<label for="supportModal-email">Выберите услугу/проблему</label>
+					<select class="form-control" name="type" id="supportModal-type">
+						<option value="1" selected="selected">Восстановление аккаунта</option>
+						<option value="2">Финансовый отдел</option>
+						<option value="3">Технический отдел</option>
+						<option value="4">Жалоба</option>
+						<option value="5">Другое</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="supportModal-email">Тема</label>
+					<input type="text" name="topic" id="supportModal-topic" class="form-control" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label for="supportModal-message">Ваше сообщение</label>
+					<textarea name="message" id="supportModal-message" class="form-control" autocomplete="off" rows="4" value=""></textarea>
+					<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+				</div>
+				</div>
+				</div>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-info modalFormSubmitButton" id="supportModal-submit">Отправить сообщение</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+
+<script>
+
+$('#newticket').click(function() {
+	var $modal = $('#supportModal');
+	$modal.modal('show');
+	return false;
+});
+
+$('#supportModal-submit').click(function() {
+	var $modal = $('#supportModal');
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'new', type_ticket: $('#supportModal-type').val(), topic: $('#supportModal-topic').val(), message: $('#supportModal-message').val()},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$modal.modal('hide');
+				$('#supportCompleteModal').modal('show');
+				LoadTickets();
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+	return false;
+});
+
+function LoadTickets(){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'load_tickets'},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$('#ticket_list').html(Data['d']);
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function CloseTicket(id){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'close', id: id},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				window.location.href = '/account/support/';
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function LoadTicket(id){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'load_ticket', id: id},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$('#ticket_message').html(Data['d']);
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+function SendMessage_Ticket(id, message){
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/support/',
+		data: {type: 'new_message_ticket', id: id, message: message},
+		success: function(data){
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				LoadTicket(id);
+				$('#ticket-message').val('');
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+}
+
+</script>
+
+
+
+<div class="modal fade" id="supportCompleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body">
+<h1 class="text-success text-center">Сообщение отправлено</h1>
+<hr>
+<p class="lead"></p><p class="lead">В самое ближайшее время вы получите подтверждение о получении вашего сообщения нашей службой поддержки. </p><p></p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="modal fade" id="supportErrorModal" sendareply('0',="" true,="" 'Сумма="" не="" является="" числом.="" Доступные="" символы:="" 0-9="" и="" ".".');="" <div="">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">Произошла ошибка</h4>
+</div>
+<div class="modal-body">
+<h1 class="text-danger text-center">Произошла ошибка</h1>
+<p class="lead">Извините. Пожалуйста, попробуйте позднее.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form>
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-body">
+				<p class="lead">Укажите новый email.<br><br></p>
+		<div class="row text-center">
+					<div class="col-sm-6 col-sm-offset-3">
+						<div class="form-group">
+							<label for="changeEmailModal-email">Новый email</label>
+							<input name="email" id="changeEmailModal-email" class="form-control" autocomplete="off" data-empty="Заполните" data-incorrect="Incorrect email" type="text">
+							<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+						</div>
+					</div>
+				</div>
+		<div class="row text-center">
+					<div class="col-sm-6 col-sm-offset-3">
+						<div class="form-group">
+															<label for="changeEmailModal-code">Ваш пароль</label>
+								<input id="changeEmailModal-code" class="form-control" data-isotp="false" data-incorrect="Неверный пароль или код." data-empty="Заполните" type="password">
+														<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+						</div>
+					</div>
+				</div>
+	</div>
+	<div class="modal-footer">
+				<button type="button" class="btn btn-info modalFormSubmitButton" id="changeEmailModal-submit" data-value="Сменить email" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait">Сменить email</button>
+	<button type="button" class="btn btn-default" id="changeEmailModal-cancel" data-dismiss="modal">Отменить</button>
+	</div>
+	</div>
+	</div>
+</form>
+</div>
+
+
+
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form>
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-body">
+									<p class="lead">Вы собираетесь изменить пароль. Пожалуйста, подтвердите операцию вводом своего текущего пароля.</p>
+						<div class="row text-center">
+					<div class="col-sm-6 col-sm-offset-3">
+						<div class="form-group">
+							<label for="changePasswordModal-code">
+								Текущий пароль							</label>
+							<input name="code" id="changePasswordModal-code" class="form-control" autocomplete="off" value="" data-empty="Заполните" type="password">
+							<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+						</div>
+						<div class="form-group">
+							<label for="changePasswordModal-code">
+								Новый пароль							</label>
+							<input name="code" id="changePasswordModal-code1" class="form-control" autocomplete="off" value="" data-empty="Заполните" type="password">
+							<p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+						</div>
+					</div>
+				</div>
+	</div>
+	<div class="modal-footer">
+	<button type="button" class="btn btn-info modalFormSubmitButton" id="changePasswordModal-submit" data-value="Изменить пароль" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait">Изменить пароль</button>
+	<button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+	</div>
+	</div>
+	</div>
+</form>
+</div>
+
+
+<script>
+
+
+$('.showChangePasswordDialog').click(function() {
+	var $modal = $('#changePasswordModal');
+	$modal.modal('show');
+	return false;
+});
+
+$('#changeEmailModal-submit').click(function() {
+	var $modal = $('#changeEmailModal');
+	var password = $('#changeEmailModal-code').val();
+	var email = $('#changeEmailModal-email').val();
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/settings/',
+		data: {type: 'change_email', password: password, email: email},
+		success: function (data) {
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$modal.modal('hide');
+				alert(Data['d']);
+				window.location.href = '/account/settings/';
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+	return false;
+});
+
+$('#changePasswordModal-submit').click(function() {
+	var $modal = $('#changePasswordModal');
+	var password = $('#changePasswordModal-code').val();
+	var new_password = $('#changePasswordModal-code1').val();
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/settings/',
+		data: {type: 'change_password', password: password, new_password: new_password},
+		success: function (data) {
+			var Data = JSON.parse(data);
+			if (Data['s'] == 1) {
+				$modal.modal('hide');
+				alert(Data['d']);
+				window.location.href = '/account/settings/';
+			} else {
+				alert(Data['d']);
+			}
+		}
+	});
+	return false;
+});
+
+$('.showChangeEmailDialog').click(function() {
+	var $modal = $('#changeEmailModal');
+	$modal.modal('show');
+	return false;
+});
+
+
+$('#preferredCurrency').change(function() {
+	$.ajax({
+		type: 'POST',
+		url: '/ajax/settings/',
+		data: {type: 'change_currency', currency: $(this).val()}
+	});
+});
+
+
+</script> <link rel="alternate" href="https://www.circle.com/en/invest" hreflang="x-default">
+{% endblock %}

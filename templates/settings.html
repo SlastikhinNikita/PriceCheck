@@ -1,0 +1,344 @@
+{% extends 'base.html' %} {% block title %} Home {% endblock %} {% block main_content %}
+<div style="background-color: #e79898;text-align: center;"> </div>
+<div class="123123">
+
+</div>
+
+{% include 'navbar.html' %}
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+    <div class="wow  bounceInRight lk_inner_page  animated" style="visibility: visible; animation-name: bounceInRight;">
+        <div class="center">
+            <h1>Настройка личных данных</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="lk_block wow zoomInDown" style="font-size: 20px; line-height: 28px; visibility: visible; animation-name: zoomInDown; min-height: auto;">
+                    <div class="tab-content" id="tabContent" data-preloader="&lt;img src='/ui/img/loading.gif'&gt; Пожалуйста, ждите...">
+                        <div class="tab-pane fade in active text-left" id="settings">
+                            <ul class="nav nav-rates nav-tabs nav-justified" role="tablist">
+                                <li class="active"><a href="#general" role="tab" data-toggle="tab" aria-expanded="true">Общие</a></li>
+                               <!--- <li class=""><a href="#security" role="tab" data-toggle="tab" id="tab-security" aria-expanded="false">Безопасность </a></li> --->
+                            </ul>
+                            <div class="tab-content">
+                                <br>
+                                <div class="tab-pane active in" id="general">
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <h2>Email &amp; Пароль</h2>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <p class="lead">Email: <b>{{ current_user.email }}</b>
+                                                        <br>Пароль: <b>******</b></p>
+                                                    <a href="#" class="btn btn-default showChangeEmailDialog" data-toggle="modal" data-target="#changeEmailModal"><span class="glyphicon glyphicon-envelope"></span> Сменить email</a>
+                                                    <a href="#" class="btn btn-default showChangePasswordDialog" data-toggle="modal" data-target="#changePasswordModal"><span class="glyphicon glyphicon-lock"></span> Изменить пароль</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <h2>Уважаемый(я) {{ current_user.firstname }} &nbsp;{{ current_user.secondname }}</h2>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <p style="font-size: 0.7em;"> Никогда и никому не сообщайте свой пароль! Будьте бдительны и не поддавайтесь на провокации мошенников.
+                                                        <br>
+                                                        <br> Ни отдел технической поддержки, ни какая-либо другая служба нашего сайта никогда не рассылала, не рассылает и не будет рассылать электронных писем с просьбами выслать пароль от почтового аккаунта.
+                                                        <br>
+                                                        <br> В случае, если вы получили подобного рода письмо, немедленно сообщите о нем.
+                                                        <br>
+                                                        <br> Если у вас есть хоть малейшее подозрение в том, что ваш пароль стал известен другим людям, пожалуйста, в кратчайшие сроки измините свой пароль.
+                                                    </p>
+                                                    <br>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+<!---
+                                <div class="tab-pane fade" id="security">
+
+                                    <h2 class="display-6">Последние подключения к счету</h2>
+                                    <p>Информация о последних сеансах доступа к вашему счету.</p>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Дата</th>
+                                                            <th>IP</th>
+                                                            <th>Геолокация</th>
+                                                            <th>Статус</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="settingsSecurityHistoryRows">
+
+                                                        <tr>
+                                                            <td>17.11.2018 19:06:09</td>
+                                                            <td>172.68.239.180</td>
+                                                            <td>-</td>
+                                                            <td>Успешный вход.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>16.11.2018 14:36:47</td>
+                                                            <td>172.68.239.180</td>
+                                                            <td>-</td>
+                                                            <td>Успешный вход.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>16.11.2018 14:36:37</td>
+                                                            <td>172.68.239.180</td>
+                                                            <td>-</td>
+                                                            <td>Successful registration.</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+								
+								
+								--->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#sumsumsum1, #sumsumsum2").keydown(function(event) {
+                    // Разрешаем: backspace, delete, tab и escape
+                    if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 ||
+                        // Разрешаем: Ctrl+A
+                        (event.keyCode == 65 && event.ctrlKey === true) ||
+                        // Разрешаем: home, end, влево, вправо
+                        (event.key == ".") ||
+                        (event.keyCode >= 35 && event.keyCode <= 39)) {
+                        // Ничего не делаем
+                        return;
+                    } else {
+                        // Обеждаемся, что это цифра, и останавливаем событие keypress
+                        if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                            event.preventDefault();
+                        }
+                    }
+                });
+            });
+            $(document).on("submit", "#lk_partners_transfer", function() {
+                var form = $(this);
+                form.find("input[type='submit']").attr("disabled", "disabled").addClass("disabled");
+                $.ajax({
+                    type: "POST",
+                    url: "/bitrix/components/cashbery_comp/new_lk/ajax.php",
+                    data: form.serialize(),
+                    success: function(html) {
+                        form.find(".status").html(html);
+                        form.find("input[type='submit']").removeAttr("disabled", "disabled").removeClass("disabled");
+                    }
+                });
+                return false;
+            });
+
+            function jgetintstring(s) {
+                s = (Math.floor(s * 100) / 100);
+                s = s + "";
+                return s.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+            }
+            $(document).on("change", "#lk_partners_transfer select[name='currency'], #lk_partners_transfer select[name='currency2'], #lk_partners_transfer input[name='sum']", function() {
+                var s = 0;
+                if ($("#lk_partners_transfer select[name='currency']").val().length > 0 && $("#lk_partners_transfer select[name='currency2']").val().length > 0 && $("#lk_partners_transfer input[name='sum']").val().length > 0) {
+                    var r1 = parseFloat($("#lk_partners_transfer select[name='currency']").find("option:selected").attr("data-rate"));
+                    var r2 = parseFloat($("#lk_partners_transfer select[name='currency2']").find("option:selected").attr("data-rate"));
+                    if (isNaN(r1)) {
+                        r1 = 1;
+                    }
+                    if (isNaN(r2)) {
+                        r2 = 1;
+                    }
+                    s = parseFloat($("#lk_partners_transfer input[name='sum']").val()) * r1 / r2;
+                }
+                $("#sumvalue").html(jgetintstring(s));
+            });
+            $(document).on("submit", "#lk_inner_transfer", function() {
+                var form = $(this);
+                form.find("input[type='submit']").attr("disabled", "disabled").addClass("disabled");
+                $.ajax({
+                    type: "POST",
+                    url: "/bitrix/components/cashbery_comp/new_lk/ajax.php",
+                    data: form.serialize(),
+                    success: function(html) {
+                        form.find(".status").html(html);
+                        form.find("input[type='submit']").removeAttr("disabled", "disabled").removeClass("disabled");
+                    }
+                });
+                return false;
+            });
+        </script>
+    </div>
+    <br>
+</div>
+<br>
+</div>
+<div class="clear"></div>
+</div>
+
+</section>
+
+<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Укажите новый email.
+                        <br>
+                        <br>
+                    </p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeEmailModal-email">Новый email</label>
+                                <input name="email" id="changeEmailModal-email" class="form-control" autocomplete="off" data-empty="Заполните" data-incorrect="Incorrect email" type="text">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changeEmailModal-code">Ваш пароль</label>
+                                <input id="changeEmailModal-code" class="form-control" data-isotp="false" data-incorrect="Неверный пароль или код." data-empty="Заполните" type="password">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changeEmailModal-submit" data-value="Сменить email">Сменить email</button>
+                    <button type="button" class="btn btn-info" id="changeEmailModal-cancel" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="lead">Вы собираетесь изменить пароль. Пожалуйста, подтвердите операцию вводом своего текущего пароля.</p>
+                    <div class="row text-center">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="form-group">
+                                <label for="changePasswordModal-code">
+                                    Текущий пароль </label>
+                                <input name="code" id="changePasswordModal-code" class="form-control" autocomplete="off" value="" data-empty="Заполните" type="password">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="changePasswordModal-code">
+                                    Новый пароль </label>
+                                <input name="code" id="changePasswordModal-code1" class="form-control" autocomplete="off" value="" data-empty="Заполните" type="password">
+                                <p class="error text-danger" style="display:none;border:0px;margin-top:5px;padding:5px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info modalFormSubmitButton" id="changePasswordModal-submit" data-value="Изменить пароль" data-processing="&lt;img src=&quot;/ui/img/loading.gif&quot;&gt; Processing, please wait">Изменить пароль</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Отменить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<script>
+
+
+    $('#changeEmailModal-submit').click(function() {
+        var $modal = $('#changeEmailModal');
+        var password = $('#changeEmailModal-code').val();
+        var email = $('#changeEmailModal-email').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/settings/',
+            data: {
+                type: 'change_email',
+                password: password,
+                email: email
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+                    window.location.href = '/settings.html';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#changePasswordModal-submit').click(function() {
+        var $modal = $('#changePasswordModal');
+        var password = $('#changePasswordModal-code').val();
+        var new_password = $('#changePasswordModal-code1').val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/settings/',
+            data: {
+                type: 'change_password',
+                password: password,
+                new_password: new_password
+            },
+            success: function(data) {
+                var Data = data;
+                if (Data['s'] == 1) {
+                    $modal.modal('hide');
+                    alert(Data['d']);
+                    window.location.href = '/settings.html';
+                } else {
+                    alert(Data['d']);
+                }
+            }
+        });
+        return false;
+    });
+
+
+
+    $('#preferredCurrency').change(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/settings/',
+            data: {
+                type: 'change_currency',
+                currency: $(this).val()
+            }
+        });
+    });
+	
+</script>
+{% endblock %}
